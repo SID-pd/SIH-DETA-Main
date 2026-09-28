@@ -48,7 +48,7 @@ MODERN_TO_LEGACY_STATION_ALIASES: Dict[str, str] = {
     "MBDP": "PBH",    # Maa Belha Devi Dham <-> Pratapgarh Jn (1,155 unmapped records)
     "BSBS": "MUV",    # Banaras <-> Manduadih
     "PYGS": "PYG",    # Prayagraj Sangam <-> Prayag Ghat
-    "PRRB": "ALD",    # Prayagraj Rambagh
+    "PRRB": "ALDR",   # Prayagraj Rambagh
     "SMVB": "BYPL",   # SMVT Bengaluru <-> Baiyyappanahalli
     "SSS": "UBL",     # SSS Hubballi Jn
     "MAS": "MAS",     # MGR Chennai Central
@@ -94,7 +94,7 @@ class SIHDataBridge:
 
     def _connect(self, db_key: str, readonly: bool = True) -> Optional[sqlite3.Connection]:
         path = DB_PATHS.get(db_key)
-        if not path or not path.exists():
+        if not path or (readonly and not path.exists()):
             return None
         try:
             if readonly:
@@ -339,8 +339,8 @@ class SIHDataBridge:
             row = conn.execute(
                 f"SELECT AVG(mean_delay_delta) AS mean_delay_delta, "
                 f"AVG(std_delay_delta) AS std_delay_delta, "
-                f"AVG(recovery_probability) AS recovery_probability, "
-                f"SUM(sample_count) AS sample_count "
+                f"AVG(absorption_rate_pct) AS absorption_rate_pct, "
+                f"SUM(sample_size_days) AS sample_count "
                 f"FROM sectional_profiles "
                 f"WHERE UPPER(from_station) IN ({f_ph}) AND UPPER(to_station) IN ({t_ph})",
                 [*from_variants, *to_variants],
@@ -352,7 +352,7 @@ class SIHDataBridge:
                     "to_station": canonical_modern_code(to_station),
                     "mean_delay_delta": float(row["mean_delay_delta"] or 0.0),
                     "std_delay_delta": float(row["std_delay_delta"] or 3.5),
-                    "recovery_probability": float(row["recovery_probability"] or 0.35),
+                    "recovery_probability": float((row["absorption_rate_pct"] or 35.0) / 100.0),
                     "sample_count": int(row["sample_count"] or 0),
                 }
         except Exception as exc:

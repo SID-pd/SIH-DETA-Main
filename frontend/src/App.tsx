@@ -46,7 +46,7 @@ export const App: React.FC = () => {
     setActivePage('live');
   };
 
-  const isFullScreen = activePage === 'map' || activePage === 'radar';
+  const isFullScreen = activePage === 'map';
 
   return (
     <div className={`relative min-h-screen selection:bg-[#FF6332] selection:text-white ${isFullScreen ? 'overflow-hidden bg-[#070A0F]' : ''}`}>
@@ -135,13 +135,18 @@ export const App: React.FC = () => {
           {activePage === 'radar' && (
             <motion.div
               key="radar"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.15 }}
-              className="fixed inset-0 w-screen h-screen overflow-hidden"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2 }}
             >
-              <RadarPage onNavigate={setActivePage} />
+              <RadarPage
+                onNavigate={setActivePage}
+                onInspectTrain={(trainNo) => {
+                  setTrackedTrain(trainNo);
+                  setActivePage('live');
+                }}
+              />
             </motion.div>
           )}
 

@@ -261,12 +261,13 @@ def compute_eta(
         status = s.get("status")
 
         # Infer status if missing or default
-        s_dist = float(s.get("distanceKm") or 0.0)
+        raw_dist = s.get("distanceKm")
+        s_dist = float(raw_dist) if raw_dist is not None else None
         is_curr = bool(curr_code and code and code.upper() == curr_code.upper())
-        if not status or status == "upcoming":
+        if not status or (status == "upcoming" and (is_curr or s_dist is not None)):
             if is_curr:
                 status = "current"
-            elif dist_covered is not None and dist_covered > 0:
+            elif s_dist is not None and dist_covered is not None and dist_covered > 0:
                 if s_dist < dist_covered:
                     status = "passed"
                 else:

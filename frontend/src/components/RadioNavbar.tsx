@@ -15,7 +15,7 @@ export const RadioNavbar: React.FC<RadioNavbarProps> = ({ activePage, onSelectPa
     { id: 'pnr', label: 'PNR', radioClass: 'rd-3', index: 2 },
     { id: 'station', label: 'Station', radioClass: 'rd-4', index: 3 },
     { id: 'map', label: 'Map', radioClass: 'rd-5', index: 4 },
-    { id: 'radar', label: 'Radar', radioClass: 'rd-6', index: 5 },
+    { id: 'radar', label: 'Control', radioClass: 'rd-6', index: 5 },
   ];
 
   const isAbout = activePage === 'about';

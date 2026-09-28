@@ -35,6 +35,11 @@ from app.infra.provider import ProviderClient, ProviderError
 from app.infra.repo import Repo
 from app.infra.snapshots import SnapshotWriter
 from app.settings import settings
+from app.sih_deta.controller_ops import controller_ops
+from app.sih_deta.data_bridge import bridge as sih_bridge
+from app.sih_deta.dsa_scheduler import PlatformIntervalScheduler, YenKShortestRerouter
+from app.sih_deta.quantile_engine import quantile_engine
+from app.sih_deta.surge_profiler import StationSurgeProfiler
 
 IST = timezone(timedelta(hours=5, minutes=30))
 
@@ -846,6 +851,142 @@ async def pnr_status(pnr: str = Path(..., pattern=r"^\d{10}$")):
               source=state,
               extra_meta={"retention": "not persisted; cached "
                                        f"{settings.ttl_pnr}s under a salted hash"})
+
+
+# ---------------------------------------------------------------------------
+# SIH-DETA Hybrid ML (Quantile P10/P50/P90) + Discrete DSA & Controller Ops
+# ---------------------------------------------------------------------------
+
+
+@app.get("/v1/deta/overview", tags=["sih-deta"])
+async def deta_overview():
+    """
+    Unified overview of all 6 SIH-DETA production databases, the 5 pre-ML audit
+    remediations (72,508 station alias records recovered), and live Control Room state.
+    """
+    inv = sih_bridge.get_database_inventory()
+    ctrl = controller_ops.get_control_room_state()
+    return ok(
+        {
+            "inventory": inv,
+            "controlRoom": ctrl,
+        },
+        source="live",
+        confidence=0.96,
+    )
+
+
+@app.get("/v1/deta/eta", tags=["sih-deta"])
+@app.get("/api/v1/eta", tags=["sih-deta"])
+async def deta_hybrid_eta(
+    train_number: str = Query("12301", description="5-digit train number"),
+    target_station: str | None = Query(None, description="Optional target station code (e.g. CNB, PRYJ, NDLS)"),
+    delay_override: int | None = Query(None, ge=0, le=720),
+    event_id: str | None = Query(None, description="NOMINAL | MAHA_KUMBH | CHHATH_PUJA | DIWALI_RUSH | RATH_YATRA"),
+    visibility_m: float | None = Query(None, ge=20.0, le=10000.0),
+    precip_mm: float | None = Query(None, ge=0.0, le=200.0),
+    temp_c: float | None = Query(None, ge=-5.0, le=55.0),
+):
+    """
+    Flagship SIH-DETA Hybrid ML + Discrete DSA endpoint:
+    - Layer 1: 73,342 Historical Corridor Slack Profiles + NSG (1-6) & Event Surge Dwell Inflation
+    - Layer 3: Quantile LightGBM (P10 / P50 / P90 Pinball Loss) + G&SR Fog/Monsoon/Heat Speed Caps
+    - Layer 2: Platform IntervalTree Mutual Exclusion, Outer Home Signal Cabin Hold,
+               2-Pass Space-Time DAG Departure Locking, and Yen's K-Shortest Path Rerouting.
+    """
+    ctrl = controller_ops.get_control_room_state()
+    eff_event = (event_id or ctrl["active_event_id"] or "NOMINAL").upper()
+    wx = ctrl["weather_override"]
+    eff_vis = visibility_m if visibility_m is not None else float(wx.get("visibility_meters", 4200.0))
+    eff_precip = precip_mm if precip_mm is not None else float(wx.get("precipitation_mm", 0.0))
+    eff_temp = temp_c if temp_c is not None else float(wx.get("ambient_temp_c", 29.0))
+
+    payload = quantile_engine.compute_hybrid_eta(
+        train_number=train_number,
+        target_station=target_station,
+        current_delay_override=delay_override,
+        active_event_id=eff_event,
+        visibility_meters=eff_vis,
+        precipitation_mm=eff_precip,
+        ambient_temp_c=eff_temp,
+        active_incidents=ctrl["active_incidents"],
+    )
+    return ok(payload, source="model", confidence=0.94)
+
+
+@app.get("/v1/deta/controller/state", tags=["sih-deta"])
+async def deta_controller_state():
+    """Return active Section Controller DRM cockpit state, incidents, and Token-Bucket pacing metrics."""
+    return ok(controller_ops.get_control_room_state(), source="live", confidence=0.98)
+
+
+@app.post("/v1/deta/controller/incident", tags=["sih-deta"])
+@app.post("/api/v1/controller/incident", tags=["sih-deta"])
+async def deta_report_incident(request: Request):
+    """
+    Section Controller Override endpoint:
+    Ingests CRO, ACP, TRACK_BLOCK, OHE_SNAP, SIGNAL_FAILURE, SHORT_TERMINATE, or MELA_SPECIAL,
+    cascades FIFO headway delays to trailing trains, and triggers Yen's K-Shortest Path rerouting.
+    """
+    body = await request.json()
+    res = controller_ops.report_incident(
+        incident_type=str(body.get("incident_type") or "CRO"),
+        section_from=str(body.get("section_from") or "ALJN"),
+        section_to=str(body.get("section_to") or "CNB"),
+        severity=body.get("severity"),
+        estimated_clearance_mins=body.get("estimated_clearance_mins"),
+        affected_train_number=str(body.get("affected_train_number") or "12301"),
+        controller_id=str(body.get("controller_id") or "NCR_DRM_PRYJ_01"),
+    )
+    return ok(res, source="live", confidence=0.99)
+
+
+@app.post("/v1/deta/controller/resolve", tags=["sih-deta"])
+async def deta_resolve_incident(request: Request):
+    """Resolve an active Section Controller incident (or pass incident_id='ALL' to clear all)."""
+    body = await request.json()
+    res = controller_ops.resolve_incident(incident_id=body.get("incident_id"))
+    return ok(res, source="live", confidence=0.99)
+
+
+@app.post("/v1/deta/controller/environment", tags=["sih-deta"])
+async def deta_update_environment(request: Request):
+    """Update the active Festival Surge preset (e.g. MAHA_KUMBH, CHHATH_PUJA) and G&SR weather state."""
+    body = await request.json()
+    state = controller_ops.set_environment_and_surge(
+        event_id=body.get("event_id"),
+        visibility_meters=body.get("visibility_meters"),
+        precipitation_mm=body.get("precipitation_mm"),
+        ambient_temp_c=body.get("ambient_temp_c"),
+    )
+    return ok(state, source="live", confidence=0.99)
+
+
+@app.get("/v1/deta/stations/{code}/platforms", tags=["sih-deta"])
+async def deta_station_platforms(
+    code: str = Path(..., max_length=10),
+    event_id: str | None = Query(None, description="Optional override: NOMINAL | MAHA_KUMBH | CHHATH_PUJA | DIWALI_RUSH | RATH_YATRA"),
+):
+    """
+    Return the Station Platform Slot IntervalTree schedule, mutual-exclusion check,
+    Approach Cabin Outer Signal holds, and NSG 1-6 / Festival Surge Dwell Dilation.
+    """
+    eff_event = (event_id or controller_ops.active_event_id or "NOMINAL").upper()
+    schedule = PlatformIntervalScheduler.build_station_intervals(
+        station_code=code.upper(),
+        active_event_id=eff_event,
+    )
+    return ok(schedule, source="model", confidence=0.95)
+
+
+@app.get("/v1/deta/reroute", tags=["sih-deta"])
+async def deta_reroute(
+    from_code: str = Query("CNB"),
+    to_code: str = Query("PRYJ"),
+):
+    """Compute Yen's K-Shortest Path electrified bypass route when track section (from_code, to_code) is severed."""
+    plan = YenKShortestRerouter.find_detour(from_code, to_code, require_electric_traction=True)
+    return ok(plan, source="model", confidence=0.97)
 
 
 @app.exception_handler(RequestValidationError)

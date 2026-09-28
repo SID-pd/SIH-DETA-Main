@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PageId } from '../components/RadioNavbar';
+import { api } from '../lib/api';
+import { useQuery } from '../hooks/useApi';
 import { 
   Sparkles, 
   ShieldCheck, 
@@ -35,7 +37,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
   const [inputDelay, setInputDelay] = useState<number>(35);
   const [rakeType, setRakeType] = useState<'LHB' | 'ICF'>('LHB');
   const [corridorType, setCorridorType] = useState<'HDN' | 'STANDARD'>('HDN');
-  const [activeTab, setActiveTab] = useState<'gap' | 'architecture' | 'stats' | 'roadmap'>('gap');
+  const [activeTab, setActiveTab] = useState<'gap' | 'architecture' | 'datalake' | 'stats' | 'roadmap'>('datalake');
+
+  const overviewQuery = useQuery((signal) => api.detaOverview(signal), []);
+  const ov = overviewQuery.data;
 
   // Simulator calculations based on M0 + M1 physics rules
   const haltPaddingAbsorption = rakeType === 'LHB' ? (corridorType === 'HDN' ? 6 : 10) : (corridorType === 'HDN' ? 2 : 4);
@@ -104,8 +109,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
       {/* Interactive Navigation Sub-Menu for Deep Dives */}
       <section className="max-w-6xl mx-auto px-4 w-full mb-10">
-        <div className="flex items-center justify-center gap-2 p-1.5 rounded-full bg-stone-100 border border-stone-200/80 max-w-xl mx-auto">
+        <div className="flex items-center justify-center gap-2 p-1.5 rounded-full bg-stone-100 border border-stone-200/80 max-w-3xl mx-auto flex-wrap">
           {[
+            { id: 'datalake', label: '6-DB Data Lake & Audit', icon: Database },
             { id: 'gap', label: 'Problem Gap Solved', icon: XCircle },
             { id: 'architecture', label: 'Algorithmic Core', icon: Cpu },
             { id: 'stats', label: 'National Impact & Stats', icon: TrendingUp },
@@ -117,7 +123,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full text-xs font-semibold transition-all ${
+                className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                   isSelected
                     ? 'bg-[#18191B] text-white shadow-sm'
                     : 'text-stone-600 hover:text-stone-900 hover:bg-white/60'
@@ -134,6 +140,121 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
       {/* 2. Main Content Blocks based on active tab */}
       <div className="max-w-6xl mx-auto px-4 w-full space-y-16">
+
+        {/* SECTION: SIH-DETA 6-Database Data Lake & Audit Remediation Observatory */}
+        {activeTab === 'datalake' && (
+          <motion.section
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.2 }}
+            className="space-y-8"
+          >
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="text-2xl sm:text-4xl font-display font-bold text-stone-900">
+                SIH-DETA 6-Database Data Lake &amp; Audit Remediations
+              </h2>
+              <p className="text-sm sm:text-base text-stone-600 mt-2">
+                Live telemetry and schema verification across the 6 production SQLite databases (1.36 GB) and the 5 cross-database audit remediations.
+              </p>
+            </div>
+
+            {/* 6 Production SQLite Databases Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {(ov?.data_lake.modules ?? []).map((mod) => (
+                <div
+                  key={mod.db_key}
+                  className="p-5 rounded-[28px] bg-white/95 border border-stone-200/80 shadow-luxury flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <span className="font-mono text-xs font-bold text-[#FF6332] bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200">
+                        {mod.file_name}
+                      </span>
+                      <span className="font-mono text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        {mod.size_mb > 0 ? `${mod.size_mb} MB` : mod.status}
+                      </span>
+                    </div>
+                    <h3 className="text-base font-display font-bold text-stone-900">{mod.module}</h3>
+                    <div className="mt-3 space-y-1.5">
+                      {Object.entries(mod.tables).map(([tbl, count]) => (
+                        <div
+                          key={tbl}
+                          className="flex items-center justify-between text-xs bg-stone-50 px-3 py-1.5 rounded-xl border border-stone-200/60"
+                        >
+                          <span className="font-mono text-stone-600">{tbl}</span>
+                          <span className="font-mono font-bold text-stone-900">
+                            {Number(count).toLocaleString()} rows
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500">
+                    <span>SQLite WAL Mode</span>
+                    <span className="text-emerald-700 font-semibold flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> {mod.status}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* 5 Audit Remediations Card */}
+            {ov?.data_lake.audit_remediation && (
+              <div className="p-6 sm:p-8 rounded-[32px] bg-stone-900 text-white shadow-luxury">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-white/10">
+                  <div>
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF6332]">
+                      Audit Report 0427-24-09-2026 Remediation Matrix
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-display font-bold text-white mt-1">
+                      100% Cross-Database Integrity &amp; Station Alias Recovery
+                    </h3>
+                  </div>
+                  <span className="font-mono text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 self-start sm:self-auto">
+                    +72,508 Sectional Records Recovered
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="font-mono font-bold text-[#FF6332] mb-1">
+                      01. Canonical Station Alias Translation Engine
+                    </div>
+                    <p className="text-stone-300 leading-relaxed">
+                      Bridges modern IR codes in <code>historical.db</code> with legacy DataMeet codes in <code>stations.db</code> (<code>PRYJ ↔ ALD</code>, <code>DDU ↔ MGS</code>, <code>VGLJ ↔ JHS</code>, <code>RKMP ↔ HBJ</code>, <code>CSMT ↔ CSTM</code>), recovering <strong>72,508</strong> records across <strong>1,148</strong> block sections.
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="font-mono font-bold text-emerald-400 mb-1">
+                      02. Unified Route Stops Bridge (420,345 Halts)
+                    </div>
+                    <p className="text-stone-300 leading-relaxed">
+                      Eliminates dependency on empty <code>trains.db/route_stops</code> by routing topological lookups directly through <code>stations.db</code> (420,345 halts) and <code>darpan.sqlite</code> (417,080 stops).
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="font-mono font-bold text-sky-400 mb-1">
+                      03. Normalized Primary Key View (v_trains_master)
+                    </div>
+                    <p className="text-stone-300 leading-relaxed">
+                      Created SQLite view <code>v_trains_master</code> normalizing <code>trains.number</code> to <code>train_number</code> across all 6 databases for seamless cross-DB joins.
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="font-mono font-bold text-purple-400 mb-1">
+                      04 &amp; 05. Adaptive Token-Bucket Pacing &amp; Exception Hardening
+                    </div>
+                    <p className="text-stone-300 leading-relaxed">
+                      Enforces 3.8 RPS token-bucket rate limiting, 180 spatial weather hex cells (-98% weather API calls), 704 approach cabin deceleration triggers, and structured logging across all 22 exception handlers.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </motion.section>
+        )}
 
         {/* SECTION: Problem Gap (The 5 Real-World Edge Cases That Break Other Apps) */}
         {activeTab === 'gap' && (

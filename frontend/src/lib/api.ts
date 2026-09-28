@@ -301,6 +301,353 @@ export interface ProviderHealth {
   };
 }
 
+export interface DetaDatabaseModule {
+  module: string;
+  db_key: string;
+  file_name: string;
+  present_on_disk: boolean;
+  size_mb: number;
+  tables: Record<string, number>;
+  status: string;
+}
+
+export interface DetaOverview {
+  system_name: string;
+  version: string;
+  architecture_layers: {
+    layer_1_ml: string;
+    layer_2_dsa: string;
+    layer_3_ops: string;
+  };
+  data_lake: {
+    modules: DetaDatabaseModule[];
+    audit_remediation: {
+      issue_1_station_alias_engine: {
+        status: string;
+        recovered_records: number;
+        recovered_block_sections: number;
+        sample_aliases: Record<string, string>;
+      };
+      issue_2_route_stops_bridge: { status: string; active_source: string };
+      issue_3_pk_column_normalization: { status: string; view: string };
+      issue_4_live_kinematic_pacing: { status: string; engine: string };
+      issue_5_exception_hardening: { status: string; locations_hardened: number };
+    };
+  };
+  control_room: ControlRoomState;
+}
+
+export interface ReroutePlan {
+  severed_section: string;
+  edge_weight: string;
+  original_via_stations: string[];
+  original_distance_km: number;
+  detour_via_stations: string[];
+  detour_corridors: string[];
+  detour_distance_km: number;
+  added_distance_km: number;
+  estimated_detour_penalty_mins: number;
+  traction_verified: string;
+  algorithm: string;
+}
+
+export interface ControllerIncident {
+  incident_id: string;
+  incident_type: string;
+  title: string;
+  section_from: string;
+  section_to: string;
+  severity: string;
+  estimated_clearance_mins: number;
+  affected_train_number: string;
+  controller_id: string;
+  physics_mechanism: string;
+  action_recommended: string;
+  created_at: string;
+  is_resolved: boolean;
+  trailing_trains_delayed?: string[];
+  reroute_plan?: ReroutePlan | null;
+}
+
+export interface EventSurgePreset {
+  event_id: string;
+  event_name: string;
+  surge_multiplier: number;
+  waitlist_load_factor: number;
+  special_trains_injected: number;
+  affected_stations: string[];
+  description: string;
+}
+
+export interface ControlRoomState {
+  as_of: string;
+  degradation_level: 'LEVEL_1_NORMAL' | 'LEVEL_2_DEAD_RECKONING' | 'LEVEL_3_BLACK_SWAN';
+  degradation_description: string;
+  active_event_id: string;
+  active_event_preset: EventSurgePreset;
+  available_event_presets: EventSurgePreset[];
+  weather_override: {
+    visibility_meters: number;
+    precipitation_mm: number;
+    ambient_temp_c: number;
+  };
+  active_incidents: ControllerIncident[];
+  incident_catalog: Array<{
+    type: string;
+    title: string;
+    default_detention_mins: number;
+    default_severity: string;
+    physics_mechanism: string;
+    trailing_trains_affected: string[];
+    action_recommended: string;
+  }>;
+  adaptive_pacing_engine: {
+    cataloged_trains_total: number;
+    active_window_trains_polled: number;
+    inactive_sleeping_trains: number;
+    network_load_reduction_pct?: number;
+    network_Load_reduction_pct?: number;
+    spatial_weather_hex_cells: number;
+    stations_covered_by_hex_grid: number;
+    weather_api_reduction_pct: number;
+    token_bucket_rate_rps: number;
+    token_bucket_burst_capacity: number;
+    outer_deceleration_poll_interval_sec: number;
+    tier1_rajdhani_vb_poll_interval_sec: number;
+    tier2_express_poll_interval_sec: number;
+  };
+}
+
+export interface HybridStopPrediction {
+  stop_sequence: number;
+  station_code: string;
+  station_name: string;
+  distance_km: number;
+  status: 'PASSED' | 'CURRENT' | 'UPCOMING';
+  scheduled_arrival: string;
+  p10_optimistic_eta: string;
+  p50_median_eta: string;
+  p90_pessimistic_eta: string;
+  p10_delay_mins: number;
+  p50_delay_mins: number;
+  p90_delay_mins: number;
+  naive_static_eta: string;
+  naive_static_delay_mins: number;
+  slack_absorbed_mins: number;
+  scheduled_dwell_mins: number;
+  dilated_dwell_mins: number;
+  nsg_category: string;
+  surge_multiplier: number;
+  assigned_platform: number;
+  outer_signal_hold_mins: number;
+  outer_signal_hold_risk: number;
+  approach_cabin: { cabin_code: string; cabin_name: string; distance_to_parent_km?: number; signal_aspect?: string } | null;
+  dag_lock_status: string;
+}
+
+export interface MicroTraversalNode {
+  node_id: string;
+  node_type: string;
+  code: string;
+  name: string;
+  signal_aspect: string;
+  visibility_m: number;
+  speed_limit_kmh: number;
+  micro_delay_delta_mins: number;
+  root_cause: string;
+}
+
+export interface HybridEtaPayload {
+  train_number: string;
+  train_name: string;
+  train_type: string;
+  priority_tier: number;
+  priority_label: string;
+  degradation_level: string;
+  traversal_mode: string;
+  target_station: string;
+  target_station_name: string;
+  scheduled_arrival: string;
+  current_telemetry: {
+    last_reported_station: string;
+    last_reported_station_name: string;
+    distance_covered_km: number;
+    distance_remaining_km: number;
+    instantaneous_delay_mins: number;
+    delay_drift_rate_100km: number;
+    delay_trend: string;
+  };
+  predictions: {
+    p10_optimistic_arrival: string;
+    p50_median_arrival: string;
+    p90_pessimistic_arrival: string;
+    p10_time: string;
+    p50_time: string;
+    p90_time: string;
+    naive_static_time: string;
+    p10_delay_mins: number;
+    p50_delay_mins: number;
+    p90_delay_mins: number;
+    slack_absorption_expected_mins: number;
+    confidence_interval_width_mins: number;
+    monotonic_bounds_verified: boolean;
+  };
+  layer1_behaviour_and_surge: {
+    corridor_profiles_indexed: number;
+    historical_records_analyzed: number;
+    alias_recovered_records: number;
+    target_station_surge: StationSurgeProfile;
+  };
+  layer2_dsa_constraints: {
+    assigned_platform: number;
+    outer_signal_hold_risk: number;
+    outer_signal_detention_mins: number;
+    approach_cabin: { cabin_code: string; cabin_name: string } | null;
+    headway_guard_margin_mins: number;
+    space_time_dag: {
+      architecture: string;
+      max_iterations_k_max: number;
+      cyclic_feedback_possible: boolean;
+      total_locked_nodes: number;
+    };
+    active_tsr_on_corridor: Array<{
+      section: string;
+      speed_cap_kmh: number;
+      nominal_mps_kmh: number;
+      reason: string;
+      rule: string;
+    }>;
+    reroute_plan: ReroutePlan | null;
+  };
+  weather_constraints: {
+    station_code: string;
+    visibility_meters: number;
+    is_foggy: boolean;
+    fog_speed_cap_kmh: number | null;
+    fog_rule: string;
+    precipitation_mm: number;
+    monsoon_active: boolean;
+    monsoon_speed_cap_kmh: number | null;
+    monsoon_rule: string;
+    ambient_temp_c: number;
+    estimated_rail_temp_c: number;
+    heat_buckling_warning: boolean;
+    nominal_mps_kmh: number;
+    effective_mps_cap_kmh: number;
+    throttle_reason: string;
+    speed_penalty_mins_per_100km: number;
+  };
+  micro_traversal_nodes: MicroTraversalNode[];
+  stop_predictions: HybridStopPrediction[];
+  active_corridor_incidents: ControllerIncident[];
+}
+
+export interface StationSurgeProfile {
+  station_code: string;
+  station_name: string;
+  zone: string;
+  platforms: number;
+  nsg_category: string;
+  nsg_details: {
+    tier: string;
+    revenue_criterion: string;
+    passengers_criterion: string;
+    footfall_index: number;
+    base_dwell_pad_mins: number;
+    acp_risk_mins: number;
+  };
+  active_event: string;
+  event_id: string;
+  surge_multiplier_s_event: number;
+  scheduled_dwell_mins: number;
+  dilated_dwell_mins: number;
+  dwell_inflation_added_mins: number;
+  acp_risk_added_mins: number;
+  platform_saturation_rho: number;
+  outer_signal_starvation_prob: number;
+  formula_trace: string;
+}
+
+export interface PlatformIntervalEntry {
+  interval_id: string;
+  platform_number: number;
+  train_number: string;
+  train_name: string;
+  priority_tier: number;
+  priority_label: string;
+  unconstrained_arrival?: string;
+  arrival_time: string;
+  departure_time: string;
+  start_mins: number;
+  end_mins: number;
+  dwell_mins: number;
+  status: 'PLATFORM_ASSIGNED' | 'OUTER_SIGNAL_HOLD';
+  outer_detention_mins: number;
+  held_at_cabin: string | null;
+  cabin_code?: string;
+}
+
+export interface StationPlatformIntervals {
+  station_code: string;
+  station_name: string;
+  zone: string;
+  platform_count: number;
+  headway_buffer_mins: number;
+  surge_profile: StationSurgeProfile;
+  approach_cabins: Array<{
+    cabin_code?: string;
+    cabin_name?: string;
+    point_code?: string;
+    point_name?: string;
+    distance_to_parent_km?: number;
+    signal_aspect?: string;
+  }>;
+  intervals: PlatformIntervalEntry[];
+  outer_held_trains: PlatformIntervalEntry[];
+  saturation_summary: {
+    total_trains_in_window: number;
+    direct_ingress_count: number;
+    outer_signal_held_count: number;
+    mutual_exclusion_verified: boolean;
+  };
+}
+
+async function requestPost<T>(path: string, payload: Record<string, unknown>): Promise<Result<T>> {
+  let resp: Response;
+  try {
+    resp = await fetch(`${BASE}${path}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    throw new ApiFailure('NETWORK', 'Cannot reach the DARPAN API.', true, 0);
+  }
+
+  let body: Envelope<T>;
+  try {
+    body = await resp.json();
+  } catch {
+    throw new ApiFailure('BAD_RESPONSE', 'API returned a malformed response.', true, resp.status);
+  }
+
+  if (!resp.ok || body.error || body.data === null) {
+    const e = body.error;
+    throw new ApiFailure(
+      e?.code ?? 'UNKNOWN',
+      e?.message ?? `Request failed (${resp.status})`,
+      e?.retryable ?? false,
+      resp.status,
+    );
+  }
+
+  sessionCache.clear();
+  return { data: body.data, meta: body.meta };
+}
+
 // --- endpoints --------------------------------------------------------------
 
 export const api = {
@@ -331,6 +678,75 @@ export const api = {
     request<ProviderHealth>('/health/providers', signal, opts),
 
   modelMeta: (signal?: AbortSignal, opts?: RequestOptions) => request<any>('/meta/model', signal, opts),
+
+  // SIH-DETA Hybrid ML + Discrete DSA Endpoints
+  detaOverview: (signal?: AbortSignal, opts?: RequestOptions) =>
+    request<DetaOverview>('/deta/overview', signal, { forceFresh: true, ...opts }),
+
+  detaEta: (
+    params: {
+      train_number: string;
+      target_station?: string;
+      delay_override?: number;
+      event_id?: string;
+      visibility_m?: number;
+    },
+    signal?: AbortSignal,
+    opts?: RequestOptions,
+  ) => {
+    const qs = new URLSearchParams({ train_number: params.train_number });
+    if (params.target_station) qs.set('target_station', params.target_station);
+    if (params.delay_override !== undefined) qs.set('delay_override', String(params.delay_override));
+    if (params.event_id) qs.set('event_id', params.event_id);
+    if (params.visibility_m !== undefined) qs.set('visibility_m', String(params.visibility_m));
+    return request<HybridEtaPayload>(`/deta/eta?${qs.toString()}`, signal, { forceFresh: true, ...opts });
+  },
+
+  detaControllerState: (signal?: AbortSignal, opts?: RequestOptions) =>
+    request<ControlRoomState>('/deta/controller/state', signal, { forceFresh: true, ...opts }),
+
+  detaReportIncident: (payload: {
+    incident_type: string;
+    section_from?: string;
+    section_to?: string;
+    severity?: string;
+    estimated_clearance_mins?: number;
+    affected_train_number?: string;
+    controller_id?: string;
+  }) => requestPost<any>('/deta/controller/incident', payload),
+
+  detaResolveIncident: (incident_id = 'ALL') =>
+    requestPost<any>('/deta/controller/resolve', { incident_id }),
+
+  detaSetEnvironment: (payload: {
+    event_id?: string;
+    visibility_meters?: number;
+    precipitation_mm?: number;
+    ambient_temp_c?: number;
+  }) => requestPost<ControlRoomState>('/deta/controller/environment', payload),
+
+  detaStationPlatforms: (
+    code: string,
+    event_id?: string,
+    center_mins = 840,
+    signal?: AbortSignal,
+    opts?: RequestOptions,
+  ) => {
+    const qs = new URLSearchParams({ center_mins: String(center_mins) });
+    if (event_id) qs.set('event_id', event_id);
+    return request<StationPlatformIntervals>(
+      `/deta/stations/${encodeURIComponent(code)}/platforms?${qs.toString()}`,
+      signal,
+      { forceFresh: true, ...opts },
+    );
+  },
+
+  detaReroute: (from_station: string, to_station: string, signal?: AbortSignal, opts?: RequestOptions) =>
+    request<ReroutePlan>(
+      `/deta/reroute?from_station=${encodeURIComponent(from_station)}&to_station=${encodeURIComponent(to_station)}`,
+      signal,
+      { forceFresh: true, ...opts },
+    ),
 };
 
 // --- display helpers --------------------------------------------------------

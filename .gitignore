@@ -25,6 +25,7 @@ unpushed_assets/*
 *.sqlite-shm
 *.sqlite-wal
 backend/data/darpan.sqlite
+backend/data/controller_ops.db
 backend/scraper/scrape_state.sqlite
 backend/predictor/data/live_snapshots.sqlite
 backend/sih_deta/Historical-Delay-Records/data/historical.db
