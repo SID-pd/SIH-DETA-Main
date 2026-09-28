@@ -1,0 +1,47 @@
+# ==============================================================================
+# SIH-DETA .gitignore
+# Prevents large binary databases, runtime caches, and logs from bloating Git
+# ==============================================================================
+
+# Python Bytecode & Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Large SQLite Databases (Backed up in /scratch/home/sid01/sih_deta_data_backup/)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Large Data Dumps & Cache Files
+**/data/cache/
+**/data/exports/*.json
+**/data/exports/*.csv
+**/data/*.json
+!**/data/.gitkeep
+
+# Live Scraper Logs & Checkpoints
+*.log
+**/logs/
+**/data/checkpoint.json
+**/data/crawler_heartbeat.json
+**/data/crawler_beacon.json
+**/data/skipped_*.json
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

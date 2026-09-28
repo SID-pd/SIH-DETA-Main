@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layer 3: Dynamic Machine Learning ETA Engine | RailPulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Sticky Navigation Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="4" y="3" width="16" height="16" rx="2"/>
+            <path d="M4 11h16M12 3v8M8 19l-2 3M16 19l2 3M9 15h.01M15 15h.01"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-title">RailPulse <span class="brand-tag">Layer 3</span></span>
+          <span class="brand-subtitle">Dynamic ML Real-Time ETA Forecasting</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Overview & Architecture</a>
+        <a href="layer1.html">Layer 1: Behaviour</a>
+        <a href="layer2.html">Layer 2: Safety & Collision</a>
+        <a href="layer3.html" class="active">Layer 3: Dynamic ML</a>
+        <a href="traversal.html">Dual-Mode Traversal</a>
+        <a href="storage.html">Storage Paradigm</a>
+      </nav>
+
+      <span class="badge-sih">Gradient Boosted Time-Series</span>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- PAGE HERO -->
+    <section class="hero-methodology">
+      <span class="hero-pill">Computational Layer 03</span>
+      <h1 class="hero-heading">Layer 3: Dynamic Real-Time ML ETA Prediction Engine</h1>
+      <p class="hero-lead">
+        Traditional railway inquiry apps take the departure delay at the previous station and project it forward linearly across the entire route. <strong>Layer 3 continuously forecasts station arrival times using machine learning</strong>, fusing real-time locomotive GPS pings, localized halt micro-weather, temporary speed restrictions, and Layer 1 behavioural weights into a probabilistic forecast.
+      </p>
+
+      <div class="principles-grid">
+        <div class="principle-box">
+          <span class="principle-num">Inference Engine</span>
+          <h3 class="principle-title">Multimodal Feature Fusion</h3>
+          <p class="principle-desc">
+            Combines spatial track vectors, instantaneous train speed curves, localized fog density, and historical dwell DNA into a unified feature tensor.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <span class="principle-num">Probabilistic Output</span>
+          <h3 class="principle-title">Confidence & Uncertainty Ranges</h3>
+          <p class="principle-desc">
+            Rather than outputting a brittle single-minute guess, Layer 3 computes prediction variance ($P(\text{ETA})$) that automatically narrows as the train nears its destination.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <span class="principle-num">Real-Time Refresh</span>
+          <h3 class="principle-title">Continuous Re-Inference</h3>
+          <p class="principle-desc">
+            Recomputes arrivals every 30 seconds or upon significant telemetry events (abrupt deceleration, signal aspect drop, emergency brake application).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISUAL DIAGRAM: MULTIMODAL FEATURE FUSION -->
+    <section class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Model Input Topology</span>
+        <h2 class="section-title">How Layer 3 Fuses Real-Time Signals for Prediction</h2>
+        <p class="section-subtitle">
+          Visualizing the multi-stream data pipeline that feeds into the gradient-boosted time-series regressor.
+        </p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="pipeline-svg-box">
+          <svg viewBox="0 0 940 340" class="pipeline-svg-element">
+            <!-- 4 Input Feature Blocks on Left -->
+            <!-- Block 1: Live Telemetry -->
+            <g transform="translate(40, 30)">
+              <rect width="210" height="60" rx="10" fill="#fef9c3" stroke="#1e293b" stroke-width="2"/>
+              <text x="105" y="27" class="svg-text-primary" style="font-size: 13px;">Live RTIS Telemetry</text>
+              <text x="105" y="47" class="svg-text-secondary" style="font-size: 10.5px;">GPS Coordinates • Instant Speed</text>
+            </g>
+
+            <!-- Block 2: Micro-Weather -->
+            <g transform="translate(40, 105)">
+              <rect width="210" height="60" rx="10" fill="#ede9fe" stroke="#1e293b" stroke-width="2"/>
+              <text x="105" y="27" class="svg-text-primary" style="font-size: 13px;">Halt Micro-Weather</text>
+              <text x="105" y="47" class="svg-text-secondary" style="font-size: 10.5px;">Fog Visibility (m) • Rain Adhesion</text>
+            </g>
+
+            <!-- Block 3: Infrastructure Constraints -->
+            <g transform="translate(40, 180)">
+              <rect width="210" height="60" rx="10" fill="#ffedd5" stroke="#1e293b" stroke-width="2"/>
+              <text x="105" y="27" class="svg-text-primary" style="font-size: 13px;">Track Speed Restrictions</text>
+              <text x="105" y="47" class="svg-text-secondary" style="font-size: 10.5px;">Temporary Speed Limits (TSR) • Gradients</text>
+            </g>
+
+            <!-- Block 4: Layer 1 Weights -->
+            <g transform="translate(40, 255)">
+              <rect width="210" height="60" rx="10" fill="#dcfce7" stroke="#1e293b" stroke-width="2"/>
+              <text x="105" y="27" class="svg-text-primary" style="font-size: 13px;">Layer 1 Behaviour Weights</text>
+              <text x="105" y="47" class="svg-text-secondary" style="font-size: 10.5px;">Historical Dwell DNA • Driver Recovery</text>
+            </g>
+
+            <!-- Convergence Lines to ML Model -->
+            <path d="M 250 60 L 400 170" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+            <path d="M 250 135 L 400 170" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+            <path d="M 250 210 L 400 170" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+            <path d="M 250 285 L 400 170" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+
+            <!-- Center Box: LightGBM / PyTorch Inference Core -->
+            <g transform="translate(400, 100)">
+              <rect width="240" height="140" rx="16" fill="#ffe4e6" stroke="#1e293b" stroke-width="2.5"/>
+              <text x="120" y="40" class="svg-text-primary" style="font-size: 15px; font-weight: 800;">Layer 3 ML Model</text>
+              <text x="120" y="65" class="svg-text-secondary" style="font-size: 11.5px;">Gradient Boosted Regressor</text>
+              <text x="120" y="85" class="svg-text-secondary" style="font-size: 11.5px;">+ PyTorch Sequence Net</text>
+              <text x="120" y="115" class="svg-text-primary" style="font-size: 12px; font-weight: 700; fill: #be123c;">Inference Time: &lt; 15ms</text>
+            </g>
+
+            <!-- Output Arrow -->
+            <path d="M 640 170 L 710 170" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+
+            <!-- Output Box: Multi-Station Probability -->
+            <g transform="translate(710, 80)">
+              <rect width="200" height="180" rx="14" fill="#e0f2fe" stroke="#1e293b" stroke-width="2"/>
+              <text x="100" y="32" class="svg-text-primary" style="font-size: 14px; font-weight: 800;">Probabilistic Output</text>
+              <text x="100" y="65" style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; fill: #1e293b; text-anchor: middle;">PRYJ: 23:48 ± 1.8m</text>
+              <text x="100" y="85" style="font-family: var(--font-sans); font-size: 10px; font-weight: 700; fill: #166534; text-anchor: middle;">Confidence: 94%</text>
+              <text x="100" y="120" style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; fill: #1e293b; text-anchor: middle;">DDU: 01:52 ± 3.2m</text>
+              <text x="100" y="140" style="font-family: var(--font-sans); font-size: 10px; font-weight: 700; fill: #166534; text-anchor: middle;">Confidence: 88%</text>
+              <text x="100" y="165" style="font-family: var(--font-sans); font-size: 9.5px; fill: #475569; text-anchor: middle;">Sent to Layer 2 Verification</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISUAL DIAGRAM: CONFIDENCE NARROWING FUNNEL -->
+    <section class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Uncertainty Management</span>
+        <h2 class="section-title">The Confidence Funnel: As Distance Shrinks, Precision Sharpens</h2>
+        <p class="section-subtitle">
+          How RailPulse communicates uncertainty honestly to passengers and railway operations.
+        </p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="pipeline-svg-box">
+          <svg viewBox="0 0 940 240" class="pipeline-svg-element">
+            <!-- Funnel Boundary Shapes -->
+            <polygon points="120,40 820,95 820,145 120,200" fill="rgba(2, 132, 199, 0.08)" stroke="#1e293b" stroke-width="2" stroke-dasharray="4,4"/>
+
+            <!-- Central Trajectory Line -->
+            <line x1="120" y1="120" x2="820" y2="120" stroke="#0284c7" stroke-width="3"/>
+
+            <!-- Distance Stage 1: 150 km Out -->
+            <circle cx="160" cy="120" r="8" fill="#f59e0b" stroke="#1e293b" stroke-width="2"/>
+            <text x="160" y="80" style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; fill: #1e293b; text-anchor: middle;">150 km Out</text>
+            <text x="160" y="98" style="font-family: var(--font-mono); font-size: 11px; fill: #be123c; font-weight: 800; text-anchor: middle;">ETA ± 9 min</text>
+            <text x="160" y="160" style="font-family: var(--font-sans); font-size: 10px; fill: #64748b; text-anchor: middle;">Confidence: 72%</text>
+
+            <!-- Distance Stage 2: 50 km Out -->
+            <circle cx="480" cy="120" r="8" fill="#f59e0b" stroke="#1e293b" stroke-width="2"/>
+            <text x="480" y="80" style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; fill: #1e293b; text-anchor: middle;">50 km Out</text>
+            <text x="480" y="98" style="font-family: var(--font-mono); font-size: 11px; fill: #d97706; font-weight: 800; text-anchor: middle;">ETA ± 3.5 min</text>
+            <text x="480" y="160" style="font-family: var(--font-sans); font-size: 10px; fill: #64748b; text-anchor: middle;">Confidence: 89%</text>
+
+            <!-- Distance Stage 3: Approaching Home Signal (5 km Out) -->
+            <circle cx="800" cy="120" r="8" fill="#10b981" stroke="#1e293b" stroke-width="2"/>
+            <text x="800" y="80" style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; fill: #1e293b; text-anchor: middle;">Platform Outer Signal</text>
+            <text x="800" y="98" style="font-family: var(--font-mono); font-size: 11px; fill: #15803d; font-weight: 800; text-anchor: middle;">ETA ± 45 sec</text>
+            <text x="800" y="160" style="font-family: var(--font-sans); font-size: 10px; fill: #15803d; font-weight: 700; text-anchor: middle;">Confidence: 98%</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAILURE OF STATIC TIMETABLES VS LAYER 3 ADAPTATION -->
+    <section class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Methodological Contrast</span>
+        <h2 class="section-title">Static Extrapolation vs Dynamic Real-Time Adaptation</h2>
+      </div>
+
+      <div class="deep-dive-grid">
+        <div class="feature-visual-card pastel-pink">
+          <div class="feature-card-header">
+            <h3>Static Timetable Extrapolation</h3>
+            <span class="breakdown-badge" style="color: #be123c;">Legacy Flaw</span>
+          </div>
+          <ul class="feature-bullet-list">
+            <li>Train departs Kanpur Central 15 minutes late.</li>
+            <li>System blindly adds 15 minutes to all downstream arrival times all the way to Howrah (1,000 km away).</li>
+            <li>Blind to whether the train has a clear track ahead to make up time.</li>
+            <li>Blind to sudden river-basin fog slowing the train down to 30 km/h.</li>
+            <li>Passengers and platform staff receive inaccurate times, causing platform congestion.</li>
+          </ul>
+        </div>
+
+        <div class="feature-visual-card pastel-green">
+          <div class="feature-card-header">
+            <h3>RailPulse Layer 3 Dynamic Model</h3>
+            <span class="breakdown-badge" style="color: #15803d;">Modern Standard</span>
+          </div>
+          <ul class="feature-bullet-list">
+            <li>Ingests real-time speed from GPS (42 km/h detected in fog valley).</li>
+            <li>Identifies exact length of fog restriction (KM 1020-1032).</li>
+            <li>Forecasts that delay will temporarily increase by 12 minutes, but Layer 1 buffer will recover 3 minutes before Prayagraj.</li>
+            <li>Updates Redis within 1.2 milliseconds for instant passenger visibility.</li>
+            <li>Station master at Prayagraj receives exact platform slot time, avoiding platform clashes.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div><strong>RailPulse</strong> — Smart India Hackathon Operational Intelligence</div>
+      <div>Layer 3: Dynamic Gradient Boosted ML • Multimodal Feature Fusion • Probabilistic Uncertainty Funnels</div>
+    </div>
+  </footer>
+
+</body>
+</html>

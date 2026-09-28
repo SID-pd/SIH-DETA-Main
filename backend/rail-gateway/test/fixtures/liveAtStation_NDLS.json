@@ -1,0 +1,659 @@
+{
+  "success": true,
+  "data": {
+    "summary": "26 Trains departing from/arriving at NDLS- NEW DELHI in next 2 Hrs.",
+    "totalTrains": 26,
+    "trains": [
+      {
+        "trainNo": "64443",
+        "trainName": "GZB-DLI EMU",
+        "source": "GZB",
+        "sourceName": "GHAZIABAD",
+        "dest": "DLI",
+        "destName": "DELHI",
+        "trainType": "EMU",
+        "classes": "GEN",
+        "runDate": "01-Sep-2026",
+        "platform": "10",
+        "cancelled": null,
+        "arrival": {
+          "actual": "20:05",
+          "scheduled": "19:18",
+          "delay": "47 Mins.",
+          "delayed": true
+        },
+        "departure": {
+          "actual": "20:06",
+          "scheduled": "19:20",
+          "delay": "46 Mins.",
+          "delayed": true
+        }
+      },
+      {
+        "trainNo": "64418",
+        "trainName": "DLI-GZB MEMU",
+        "source": "DLI",
+        "sourceName": "DELHI",
+        "dest": "GZB",
+        "destName": "GHAZIABAD",
+        "trainType": "MEMU",
+        "classes": "GEN",
+        "runDate": "01-Sep-2026",
+        "platform": "14",
+        "cancelled": null,
+        "arrival": {
+          "actual": "20:13",
+          "scheduled": "18:55",
+          "delay": "01:18 Hrs.",
+          "delayed": true
+        },
+        "departure": {
+          "actual": "20:14",
+          "scheduled": "18:57",
+          "delay": "01:17 Hrs.",
+          "delayed": true
+        }
+      },
+      {
+        "trainNo": "12628",
+        "trainName": "KARNATAKA EXP",
+        "source": "NDLS",
+        "sourceName": "NEW DELHI",
+        "dest": "SBC",
+        "destName": "KSR BENGALURU",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "6",
+        "cancelled": null,
+        "arrival": {
+          "actual": "SRC",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "20:20",
+          "scheduled": "20:20",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "12920",
+        "trainName": "MALWA EXPRESS",
+        "source": "SVDK",
+        "sourceName": "SHMATA VD KATRA",
+        "dest": "DADN",
+        "destName": "DR AMBEDKAR NGR",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,3E,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "5",
+        "cancelled": null,
+        "arrival": {
+          "actual": "20:01",
+          "scheduled": "20:15",
+          "delay": "On Time",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "20:30",
+          "scheduled": "20:30",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "64534",
+        "trainName": "PNP-GZB MEMU",
+        "source": "PNP",
+        "sourceName": "PANIPAT JN",
+        "dest": "GZB",
+        "destName": "GHAZIABAD",
+        "trainType": "MEMU",
+        "classes": "GEN",
+        "runDate": "01-Sep-2026",
+        "platform": "11",
+        "cancelled": null,
+        "arrival": {
+          "actual": "20:29",
+          "scheduled": "19:50",
+          "delay": "39 Mins.",
+          "delayed": true
+        },
+        "departure": {
+          "actual": "20:30",
+          "scheduled": "19:52",
+          "delay": "38 Mins.",
+          "delayed": true
+        }
+      },
+      {
+        "trainNo": "12425",
+        "trainName": "JAMMU RAJDHANI",
+        "source": "NDLS",
+        "sourceName": "NEW DELHI",
+        "dest": "JAT",
+        "destName": "JAMMU TAWI",
+        "trainType": "RAJDHANI",
+        "classes": "1A,2A,3A",
+        "runDate": "01-Sep-2026",
+        "platform": "12",
+        "cancelled": null,
+        "arrival": {
+          "actual": "SRC",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "20:40",
+          "scheduled": "20:40",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "15566",
+        "trainName": "VAISHALI EXP",
+        "source": "NDLS",
+        "sourceName": "NEW DELHI",
+        "dest": "LLP",
+        "destName": "LALIT GRAM",
+        "trainType": "MAIL EXPRESS",
+        "classes": "1A,2A,3A,3E,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "16",
+        "cancelled": null,
+        "arrival": {
+          "actual": "SRC",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "20:40",
+          "scheduled": "20:40",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "11058",
+        "trainName": "ASR CSMT EXP",
+        "source": "ASR",
+        "sourceName": "AMRITSAR JN",
+        "dest": "CSMT",
+        "destName": "C SHIVAJI MAH T",
+        "trainType": "MAIL EXPRESS",
+        "classes": "2A,3E,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "7",
+        "cancelled": null,
+        "arrival": {
+          "actual": "20:16",
+          "scheduled": "20:25",
+          "delay": "On Time",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "20:40",
+          "scheduled": "20:40",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "12445",
+        "trainName": "UTTAR S KRANTI",
+        "source": "NDLS",
+        "sourceName": "NEW DELHI",
+        "dest": "SVDK",
+        "destName": "SHMATA VD KATRA",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,3E,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "15",
+        "cancelled": null,
+        "arrival": {
+          "actual": "SRC",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "20:50",
+          "scheduled": "20:50",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "12039",
+        "trainName": "NDLS SHATABADI",
+        "source": "KGM",
+        "sourceName": "KATHGODAM",
+        "dest": "NDLS",
+        "destName": "NEW DELHI",
+        "trainType": "SHATABDI",
+        "classes": "EC,CC",
+        "runDate": "01-Sep-2026",
+        "platform": "2",
+        "cancelled": null,
+        "arrival": {
+          "actual": "20:55",
+          "scheduled": "20:55",
+          "delay": "On Time",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "DSTN",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "12622",
+        "trainName": "TAMILNADU SF EXP",
+        "source": "NDLS",
+        "sourceName": "NEW DELHI",
+        "dest": "MAS",
+        "destName": "MGR CHENNAI CTL",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,3E,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "3",
+        "cancelled": null,
+        "arrival": {
+          "actual": "SRC",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "21:05",
+          "scheduled": "21:05",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "20802",
+        "trainName": "MAGADH EXPRESS",
+        "source": "NDLS",
+        "sourceName": "NEW DELHI",
+        "dest": "IPR",
+        "destName": "ISLAMPUR",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,3E,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "14",
+        "cancelled": null,
+        "arrival": {
+          "actual": "SRC",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "21:05",
+          "scheduled": "21:05",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "12562",
+        "trainName": "SWTANTRTA S EXP",
+        "source": "NDLS",
+        "sourceName": "NEW DELHI",
+        "dest": "JYG",
+        "destName": "JAYNAGAR",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,3E,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "13",
+        "cancelled": null,
+        "arrival": {
+          "actual": "SRC",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "21:15",
+          "scheduled": "21:15",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "11449",
+        "trainName": "JBP SVDK EXP",
+        "source": "JBP",
+        "sourceName": "JABALPUR",
+        "dest": "SVDK",
+        "destName": "SHMATA VD KATRA",
+        "trainType": "MAIL EXPRESS",
+        "classes": "1A,2A,3A,3E,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "7",
+        "cancelled": null,
+        "arrival": {
+          "actual": "21:15",
+          "scheduled": "20:55",
+          "delay": "20 Mins.",
+          "delayed": true
+        },
+        "departure": {
+          "actual": "21:20",
+          "scheduled": "21:10",
+          "delay": "10 Mins.",
+          "delayed": true
+        }
+      },
+      {
+        "trainNo": "12556",
+        "trainName": "GORAKHDHAM EXP",
+        "source": "BTI",
+        "sourceName": "BATHINDA JN",
+        "dest": "GKP",
+        "destName": "GORAKHPUR JN",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "6",
+        "cancelled": null,
+        "arrival": {
+          "actual": "21:28",
+          "scheduled": "21:10",
+          "delay": "18 Mins.",
+          "delayed": true
+        },
+        "departure": {
+          "actual": "21:33",
+          "scheduled": "21:25",
+          "delay": "8 Mins.",
+          "delayed": true
+        }
+      },
+      {
+        "trainNo": "12279",
+        "trainName": "TAJ EXPRESS",
+        "source": "VGLJ",
+        "sourceName": "V LAKSHMIBAIJHS",
+        "dest": "NDLS",
+        "destName": "NEW DELHI",
+        "trainType": "SUPERFAST",
+        "classes": "CC,2S,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "15",
+        "cancelled": null,
+        "arrival": {
+          "actual": "21:35",
+          "scheduled": "21:35",
+          "delay": "On Time",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "DSTN",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "04072",
+        "trainName": "SOU SUMMER SPL",
+        "source": "NDLS",
+        "sourceName": "NEW DELHI",
+        "dest": "SOU",
+        "destName": "SUPAUL JUNCTION",
+        "trainType": "TRAIN ON DEMAND",
+        "classes": "3A,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "16",
+        "cancelled": null,
+        "arrival": {
+          "actual": "SRC",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "21:35",
+          "scheduled": "21:35",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "11077",
+        "trainName": "JHELUM EXPRESS",
+        "source": "PUNE",
+        "sourceName": "PUNE JN",
+        "dest": "JAT",
+        "destName": "JAMMU TAWI",
+        "trainType": "MAIL EXPRESS",
+        "classes": "2A,3A,SL,GEN,PWD",
+        "runDate": "31-Aug-2026",
+        "platform": "5",
+        "cancelled": null,
+        "arrival": {
+          "actual": "21:20",
+          "scheduled": "21:20",
+          "delay": "On Time",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "21:35",
+          "scheduled": "21:35",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "12137",
+        "trainName": "PUNJAB MAIL",
+        "source": "CSMT",
+        "sourceName": "C SHIVAJI MAH T",
+        "dest": "FZR",
+        "destName": "FIROZPUR CANT",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,SL,GEN,PWD",
+        "runDate": "31-Aug-2026",
+        "platform": "3",
+        "cancelled": null,
+        "arrival": {
+          "actual": "21:25",
+          "scheduled": "21:25",
+          "delay": "On Time",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "21:40",
+          "scheduled": "21:40",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "12472",
+        "trainName": "SWARAJ EXPRESS",
+        "source": "SVDK",
+        "sourceName": "SHMATA VD KATRA",
+        "dest": "BDTS",
+        "destName": "BANDRA TERMINUS",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,3E,SL,GEN",
+        "runDate": "01-Sep-2026",
+        "platform": "8",
+        "cancelled": null,
+        "arrival": {
+          "actual": "21:25",
+          "scheduled": "21:25",
+          "delay": "On Time",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "21:40",
+          "scheduled": "21:40",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "12012",
+        "trainName": "KLK SHATABADI",
+        "source": "KLK",
+        "sourceName": "KALKA",
+        "dest": "NDLS",
+        "destName": "NEW DELHI",
+        "trainType": "SHATABDI",
+        "classes": "EC,CC",
+        "runDate": "01-Sep-2026",
+        "platform": "1",
+        "cancelled": null,
+        "arrival": {
+          "actual": "21:50",
+          "scheduled": "21:50",
+          "delay": "On Time",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "DSTN",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "12416",
+        "trainName": "NDLS INDB EXP",
+        "source": "NDLS",
+        "sourceName": "NEW DELHI",
+        "dest": "INDB",
+        "destName": "INDORE JN BG",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,3E,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "4",
+        "cancelled": null,
+        "arrival": {
+          "actual": "SRC",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "21:50",
+          "scheduled": "21:50",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "12230",
+        "trainName": "LUCKNOW MAIL",
+        "source": "NDLS",
+        "sourceName": "NEW DELHI",
+        "dest": "LKO",
+        "destName": "LUCKNOW NR",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,3E,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "12",
+        "cancelled": null,
+        "arrival": {
+          "actual": "SRC",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "22:00",
+          "scheduled": "22:00",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "12418",
+        "trainName": "PRAYAGRAJ EXP",
+        "source": "NDLS",
+        "sourceName": "NEW DELHI",
+        "dest": "PRYJ",
+        "destName": "PRAYAGRAJ JN.",
+        "trainType": "SUPERFAST",
+        "classes": "1A,2A,3A,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "14",
+        "cancelled": null,
+        "arrival": {
+          "actual": "SRC",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "22:10",
+          "scheduled": "22:10",
+          "delay": "On Time",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "64073",
+        "trainName": "DHO-NDLS EMU",
+        "source": "DHO",
+        "sourceName": "DHAULPUR",
+        "dest": "NDLS",
+        "destName": "NEW DELHI",
+        "trainType": "EMU",
+        "classes": "GEN",
+        "runDate": "01-Sep-2026",
+        "platform": "10",
+        "cancelled": null,
+        "arrival": {
+          "actual": "22:20",
+          "scheduled": "22:20",
+          "delay": "On Time",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "DSTN",
+          "scheduled": "",
+          "delay": "",
+          "delayed": false
+        }
+      },
+      {
+        "trainNo": "11905",
+        "trainName": "AGC HSX EXP",
+        "source": "AGC",
+        "sourceName": "AGRA CANTT",
+        "dest": "HSX",
+        "destName": "HOSHIARPUR",
+        "trainType": "MAIL EXPRESS",
+        "classes": "2A,3A,3E,SL,GEN,PWD",
+        "runDate": "01-Sep-2026",
+        "platform": "3",
+        "cancelled": null,
+        "arrival": {
+          "actual": "22:25",
+          "scheduled": "22:25",
+          "delay": "On Time",
+          "delayed": false
+        },
+        "departure": {
+          "actual": "22:35",
+          "scheduled": "22:35",
+          "delay": "On Time",
+          "delayed": false
+        }
+      }
+    ]
+  }
+}

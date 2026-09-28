@@ -1,0 +1,1243 @@
+/* ==========================================================================
+   RailPulse: Real-Time Dynamic Railway ETA & Operational Intelligence
+   Design System: Clean, Minimal, Spatially Generous Light Architecture
+   Focus: Working Methodology, Pure System Logic & Clear Visual Graphing
+   ========================================================================== */
+
+:root {
+  /* Canvas & Structural Backgrounds */
+  --bg-canvas: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-subtle: #f1f5f9;
+  --bg-card: #ffffff;
+
+  /* Solid Dark Outlines & Contrast Borders */
+  --border-dark: #1e293b;
+  --border-mid: #475569;
+  --border-subtle: #cbd5e1;
+  --border-light: #e2e8f0;
+
+  /* High-Contrast Technical Typography */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+
+  /* Harmonious Soft Pastel Fills (Matching Reference Screenshots) */
+  --pastel-purple: #ede9fe;       /* Data Source / Decisions */
+  --pastel-purple-border: #7c3aed;
+  --pastel-purple-text: #5b21b6;
+
+  --pastel-green: #dcfce7;        /* Processing / Client Pills */
+  --pastel-green-border: #16a34a;
+  --pastel-green-text: #166534;
+
+  --pastel-yellow: #fef9c3;       /* Master DB / Telemetry / Events */
+  --pastel-yellow-border: #d97706;
+  --pastel-yellow-text: #854d0e;
+
+  --pastel-orange: #ffedd5;       /* Search / Containers / Gateways */
+  --pastel-orange-border: #ea580c;
+  --pastel-orange-text: #9a3412;
+
+  --pastel-pink: #ffe4e6;         /* Interfaces / ML Models / Outputs */
+  --pastel-pink-border: #e11d48;
+  --pastel-pink-text: #9f1239;
+
+  --pastel-blue: #e0f2fe;         /* Database Cylinders / Cache Tier */
+  --pastel-blue-border: #0284c7;
+  --pastel-blue-text: #075985;
+
+  /* Typography Stacks */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Outfit', var(--font-sans);
+  --font-mono: 'JetBrains Mono', "SFMono-Regular", Consolas, monospace;
+  --font-serif: "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+
+  /* Spatially Generous Rhythm */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
+}
+
+/* ==========================================================================
+   CSS Reset & Base
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-canvas);
+  background-image: radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
+  background-size: 32px 32px;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   Header & Sticky Navigation Bar
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--border-dark);
+}
+
+.header-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--pastel-yellow);
+  border: 2px solid var(--border-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.brand-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.brand-tag {
+  font-size: 0.74rem;
+  background: var(--pastel-purple);
+  color: var(--pastel-purple-text);
+  border: 1.5px solid var(--border-dark);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  margin-left: 6px;
+}
+
+.brand-subtitle {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1.5px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+  background: var(--bg-surface-subtle);
+  border-color: var(--border-dark);
+}
+
+.nav-links a.active {
+  background: var(--text-primary);
+  color: #ffffff;
+  border-color: var(--border-dark);
+}
+
+.badge-sih {
+  font-size: 0.8rem;
+  background: var(--pastel-orange);
+  border: 2px solid var(--border-dark);
+  color: var(--pastel-orange-text);
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Main Container Layout (Generous Breathing Room)
+   ========================================================================== */
+.main-content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 56px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 88px; /* Generous separation so sections never collapse into each other */
+}
+
+/* Base Card Styling */
+.method-card {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 36px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Section Header Typography */
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-badge {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  color: var(--pastel-purple-text);
+  background: var(--pastel-purple);
+  border: 1.5px solid var(--border-dark);
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  display: inline-block;
+  width: fit-content;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  max-width: 900px;
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   Hero & Methodology Overview (No Vanity Numbers)
+   ========================================================================== */
+.hero-methodology {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-lg);
+  padding: 48px 44px;
+  box-shadow: var(--shadow-card);
+}
+
+.hero-pill {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  background: var(--pastel-yellow);
+  border: 2px solid var(--border-dark);
+  color: var(--pastel-yellow-text);
+  font-size: 0.82rem;
+  font-weight: 700;
+  width: fit-content;
+}
+
+.hero-heading {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  max-width: 1050px;
+}
+
+.hero-lead {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 1020px;
+}
+
+.hero-lead strong {
+  color: var(--text-primary);
+}
+
+/* 4 Core Principles Grid (Spacious, Clear, Educational) */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.principle-box {
+  background: var(--bg-surface-subtle);
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.principle-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.principle-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.principle-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   DIAGRAM 1: VERTICAL PROCESSING PIPELINE (SCREENSHOT 1 METHOD)
+   ========================================================================== */
+.diagram-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+}
+
+.pipeline-svg-box {
+  width: 100%;
+  max-width: 1040px;
+  background: #ffffff;
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 40px 20px;
+  overflow-x: auto;
+}
+
+.pipeline-svg-element {
+  width: 100%;
+  min-width: 780px;
+  height: auto;
+  user-select: none;
+}
+
+/* SVG Text Styles */
+.svg-stage-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  fill: #475569;
+  text-anchor: start;
+}
+
+.svg-node-box {
+  stroke: var(--border-dark);
+  stroke-width: 2px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.svg-node-box:hover {
+  filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.15));
+}
+
+.svg-text-primary {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 700;
+  fill: var(--text-primary);
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.svg-text-secondary {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  fill: var(--text-secondary);
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.svg-arrow-path {
+  stroke: var(--border-dark);
+  stroke-width: 2.2px;
+  fill: none;
+}
+
+.svg-dashed-arrow {
+  stroke: var(--border-dark);
+  stroke-width: 2px;
+  stroke-dasharray: 6, 5;
+  fill: none;
+}
+
+.svg-arrow-text {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-style: italic;
+  fill: #334155;
+  text-anchor: middle;
+}
+
+/* Interactive Explainer Card Below Diagram */
+.logic-breakdown-card {
+  background: var(--bg-surface-subtle);
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.breakdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1.5px solid var(--border-light);
+  padding-bottom: 10px;
+}
+
+.breakdown-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.breakdown-badge {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-dark);
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.breakdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.breakdown-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.breakdown-val {
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   DIAGRAM 2: END-TO-END SYSTEM ARCHITECTURE GRAPH (SCREENSHOT 2 METHOD)
+   ========================================================================== */
+.arch-svg-box {
+  width: 100%;
+  max-width: 1120px;
+  background: #ffffff;
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 36px 16px;
+  overflow-x: auto;
+}
+
+.arch-svg-element {
+  width: 100%;
+  min-width: 960px;
+  height: auto;
+  user-select: none;
+}
+
+/* Shapes for Architecture Diagram */
+.arch-pill-shape {
+  stroke: var(--border-dark);
+  stroke-width: 2px;
+  rx: 26px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.arch-pill-shape:hover, .arch-box-shape:hover, .arch-diamond-shape:hover, .arch-cylinder-shape:hover {
+  filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.15));
+}
+
+.arch-box-shape {
+  stroke: var(--border-dark);
+  stroke-width: 2px;
+  rx: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.arch-diamond-shape {
+  stroke: var(--border-dark);
+  stroke-width: 2px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.arch-cylinder-shape {
+  stroke: var(--border-dark);
+  stroke-width: 2px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.arch-node-title {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  fill: var(--text-primary);
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.arch-node-sub {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 500;
+  fill: var(--text-secondary);
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.arch-connector-line {
+  stroke: var(--border-dark);
+  stroke-width: 2px;
+  fill: none;
+}
+
+.arch-connector-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  fill: #334155;
+  text-anchor: middle;
+}
+
+/* ==========================================================================
+   DUAL-MODE TRAVERSAL LOGIC & VISUALIZER
+   ========================================================================== */
+.traversal-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+@media (max-width: 900px) {
+  .traversal-comparison {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mode-card {
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mode-normal-card {
+  background: var(--pastel-green);
+}
+
+.mode-detailed-card {
+  background: var(--pastel-yellow);
+}
+
+.mode-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mode-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.mode-badge {
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-dark);
+  background: #ffffff;
+}
+
+.mode-formula {
+  font-family: var(--font-mono);
+  background: #ffffff;
+  border: 1.5px solid var(--border-dark);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.mode-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.mode-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mode-points li {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 18px;
+}
+
+.mode-points li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* Interactive Corridor Route Canvas */
+.corridor-container {
+  background: #ffffff;
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.corridor-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.corridor-title-tag {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.mode-switch-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-mode-tab {
+  background: var(--bg-surface-subtle);
+  border: 1.5px solid var(--border-dark);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-mode-tab.active {
+  background: var(--text-primary);
+  color: #ffffff;
+}
+
+.corridor-svg-canvas {
+  width: 100%;
+  min-width: 920px;
+  height: auto;
+  user-select: none;
+}
+
+/* Corridor Track Elements */
+.track-base {
+  stroke: #cbd5e1;
+  stroke-width: 6px;
+  stroke-linecap: round;
+}
+
+.track-active {
+  stroke: #1e293b;
+  stroke-width: 6px;
+  stroke-linecap: round;
+  transition: all 0.4s ease;
+}
+
+.stn-node {
+  cursor: pointer;
+}
+
+.stn-outer {
+  fill: #ffffff;
+  stroke: var(--border-dark);
+  stroke-width: 2.5px;
+}
+
+.stn-inner-done { fill: #10b981; }
+.stn-inner-active { fill: #f59e0b; }
+.stn-inner-next { fill: #cbd5e1; }
+
+.stn-code-text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  fill: var(--text-primary);
+  text-anchor: middle;
+}
+
+.stn-name-text {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--text-secondary);
+  text-anchor: middle;
+}
+
+.stn-time-text {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+/* Halt Nodes */
+.halt-node-group {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.halt-node-group:hover {
+  transform: scale(1.12);
+}
+
+.halt-outer-ring {
+  fill: #ffffff;
+  stroke: var(--border-dark);
+  stroke-width: 2px;
+}
+
+.halt-dot-normal { fill: #10b981; }
+.halt-dot-alert { fill: #f59e0b; }
+.halt-dot-recov { fill: #0284c7; }
+
+.halt-name-tag {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--text-primary);
+  text-anchor: middle;
+}
+
+.halt-meta-tag {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+/* Train Marker */
+.train-marker-group {
+  transition: transform 0.5s ease-out;
+}
+
+.train-hull {
+  fill: var(--pastel-yellow);
+  stroke: var(--border-dark);
+  stroke-width: 2px;
+}
+
+.train-speed-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  fill: var(--text-primary);
+  text-anchor: middle;
+}
+
+/* Explanatory Banner Below Corridor */
+.corridor-explanation {
+  background: var(--bg-surface-subtle);
+  border: 1.5px solid var(--border-dark);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.9rem;
+}
+
+.corridor-explanation strong {
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   3-LAYER COMPUTATIONAL INTELLIGENCE ENGINE (LOGIC BREAKDOWN)
+   ========================================================================== */
+.three-layers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .three-layers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.layer-box {
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.layer-box-1 { background: var(--pastel-yellow); }
+.layer-box-3 { background: var(--pastel-orange); }
+.layer-box-2 { background: var(--pastel-pink); }
+
+.layer-watermark {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 800;
+  color: rgba(15, 23, 42, 0.12);
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  line-height: 1;
+}
+
+.layer-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.layer-role {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.layer-math {
+  background: #ffffff;
+  border: 1.5px solid var(--border-dark);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.layer-text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.layer-flow-tag {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1.5px solid rgba(15, 23, 42, 0.15);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   STORAGE PARADIGM: POSTGRESQL VS REDIS
+   ========================================================================== */
+.storage-comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+@media (max-width: 900px) {
+  .storage-comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.storage-card {
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.storage-pg { background: var(--pastel-blue); }
+.storage-redis { background: var(--pastel-yellow); }
+
+.storage-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.storage-icon {
+  font-size: 2rem;
+}
+
+.storage-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.storage-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  background: #ffffff;
+  border: 1px solid var(--border-dark);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.storage-visual-box {
+  background: #ffffff;
+  border: 1.5px solid var(--border-dark);
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.storage-visual-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 8px;
+  font-size: 0.88rem;
+}
+
+.storage-visual-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.storage-visual-label {
+  font-weight: 700;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.storage-visual-val {
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+/* Visual Feature Cards for Deep-Dive Sub-Pages */
+.deep-dive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.feature-visual-card {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: var(--shadow-card);
+}
+
+.feature-visual-card.pastel-yellow { background: var(--pastel-yellow); }
+.feature-visual-card.pastel-orange { background: var(--pastel-orange); }
+.feature-visual-card.pastel-pink { background: var(--pastel-pink); }
+.feature-visual-card.pastel-blue { background: var(--pastel-blue); }
+.feature-visual-card.pastel-green { background: var(--pastel-green); }
+.feature-visual-card.pastel-purple { background: var(--pastel-purple); }
+
+.feature-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feature-card-header h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.feature-graphic-box {
+  background: #ffffff;
+  border: 1.5px solid var(--border-dark);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature-graphic-box svg {
+  width: 100%;
+  height: auto;
+}
+
+.feature-bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.feature-bullet-list li {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  position: relative;
+  padding-left: 20px;
+}
+
+.feature-bullet-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   WHAT-IF INCIDENT METHODOLOGY SANDBOX
+   ========================================================================== */
+.sandbox-method-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 28px;
+}
+
+@media (max-width: 960px) {
+  .sandbox-method-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.incident-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.incident-btn {
+  background: var(--bg-surface-subtle);
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.incident-btn:hover {
+  background: #ffffff;
+  transform: translateX(4px);
+}
+
+.incident-btn.active {
+  background: #ffffff;
+  border: 2px solid var(--border-dark);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+}
+
+.incident-btn-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.incident-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.incident-desc {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* Recomputation Terminal */
+.terminal-card {
+  background: #ffffff;
+  border: 2px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.terminal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1.5px solid var(--border-light);
+  padding-bottom: 12px;
+}
+
+.terminal-top h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.terminal-view {
+  background: var(--bg-surface-subtle);
+  border: 1.5px solid var(--border-dark);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.t-info { color: var(--pastel-blue-text); font-weight: 700; }
+.t-warn { color: var(--pastel-yellow-text); font-weight: 700; }
+.t-accent { color: var(--pastel-purple-text); font-weight: 700; }
+.t-success { color: var(--pastel-green-text); font-weight: 700; }
+.t-danger { color: var(--pastel-pink-text); font-weight: 700; }
+
+/* Decision Outcome Banner */
+.decision-outcome {
+  background: var(--pastel-yellow);
+  border: 1.5px solid var(--border-dark);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.decision-outcome strong {
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  background: #ffffff;
+  border-top: 2px solid var(--border-dark);
+  padding: 36px 36px;
+  margin-top: 56px;
+}
+
+.footer-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.footer-inner strong {
+  color: var(--text-primary);
+}

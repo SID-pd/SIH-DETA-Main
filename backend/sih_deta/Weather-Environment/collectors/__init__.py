@@ -1,0 +1,1 @@
+"""Weather collectors module."""

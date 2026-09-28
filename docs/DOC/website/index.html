@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RailPulse | Real-Time Dynamic Railway ETA & Operational Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header / Navigation Bar -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="4" y="3" width="16" height="16" rx="2"/>
+            <path d="M4 11h16M12 3v8M8 19l-2 3M16 19l2 3M9 15h.01M15 15h.01"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-title">RailPulse <span class="brand-tag">ETA-AI</span></span>
+          <span class="brand-subtitle">Indian Railways Real-Time Network Intelligence</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="active">Overview & Architecture</a>
+        <a href="layer1.html">Layer 1: Behaviour</a>
+        <a href="layer2.html">Layer 2: Safety & Collision</a>
+        <a href="layer3.html">Layer 3: Dynamic ML</a>
+        <a href="traversal.html">Dual-Mode Traversal</a>
+        <a href="storage.html">Storage Paradigm</a>
+      </nav>
+
+      <span class="badge-sih">SIH Technical Architecture</span>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- SECTION 1: SYSTEM METHODOLOGY & CORE WORKING PRINCIPLES -->
+    <section id="methodology" class="hero-methodology">
+      <span class="hero-pill">System Working Methodology</span>
+      <h1 class="hero-heading">How RailPulse Works: Real-Time Dynamic ETA Prediction & Graph Operational Intelligence</h1>
+      <p class="hero-lead">
+        Traditional railway ETAs rely on <strong>static timetable extrapolations</strong> and fixed recovery buffers, leaving operations blind to en-route signal halts, micro-valley fog, and cascading precedence delays. <strong>RailPulse</strong> replaces static timetables with an <strong>adaptive cyber-physical railway graph</strong> that decouples historical statistical behaviour, real-time machine learning inference, and strict physical railway constraint verification.
+      </p>
+
+      <!-- 4 Core Pillars of the Methodology -->
+      <div class="principles-grid">
+        <div class="principle-box">
+          <span class="principle-num">Methodology 01</span>
+          <h3 class="principle-title">Time-Dependent Graph Representation</h3>
+          <p class="principle-desc">
+            The railway network is modeled as a topological graph where nodes represent stations, junctions, and intermediate halts, while edges represent block sections parameterized with live speed restrictions (TSR), gradients, and signal aspects.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <span class="principle-num">Methodology 02</span>
+          <h3 class="principle-title">Adaptive Dual-Mode Traversal</h3>
+          <p class="principle-desc">
+            Computes aggregate section ETAs during nominal traffic flow. The moment an unexpected halt or delay variance occurs, the engine dynamically explodes into <strong>Halt-by-Halt Detailed Traversal</strong> to isolate hyper-local bottleneck causes.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <span class="principle-num">Methodology 03</span>
+          <h3 class="principle-title">3-Layer Decoupled Intelligence</h3>
+          <p class="principle-desc">
+            Strictly separates empirical dwell DNA (Layer 1), dynamic gradient-boosted time-series inference (Layer 3), and physical railway safety & headway verification (Layer 2) to ensure all predicted arrival times are mathematically feasible.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <span class="principle-num">Methodology 04</span>
+          <h3 class="principle-title">High-Throughput Tiered Storage</h3>
+          <p class="principle-desc">
+            PostgreSQL + PostGIS serves as the authoritative, private source of truth for graph topology and audits, while an in-memory Redis cluster delivers sub-1.5ms cached reads to withstand millions of concurrent IRCTC queries without database lockup.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: DIAGRAM 1 - VERTICAL PROCESSING PIPELINE (SCREENSHOT 1 METHOD) -->
+    <section id="pipeline-diagram" class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Sequential Data Flow</span>
+        <h2 class="section-title">Vertical Processing & Prediction Pipeline</h2>
+        <p class="section-subtitle">
+          A clean, sequential stage representation illustrating how raw locomotive telemetry is ingested, stored, processed through the 3-layer intelligence engine, cached in memory, and delivered as verified ETAs.
+        </p>
+      </div>
+
+      <div class="diagram-container">
+        <!-- Spacious Vertical SVG Pipeline Diagram -->
+        <div class="pipeline-svg-box">
+          <svg viewBox="0 0 940 850" class="pipeline-svg-element" id="svg-pipeline">
+            <defs>
+              <marker id="arrow-solid" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+              </marker>
+              <marker id="arrow-bi-l" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 8 1.5 L 0 5 L 8 8.5 z" fill="#1e293b"/>
+              </marker>
+              <marker id="arrow-bi-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+              </marker>
+            </defs>
+
+            <!-- STAGE NAMES (Left Margin, Clean Classic Serif) -->
+            <text x="30" y="70" class="svg-stage-title">Data Source</text>
+            <text x="30" y="195" class="svg-stage-title">Processing</text>
+            <text x="30" y="320" class="svg-stage-title">Storage</text>
+            <text x="30" y="475" class="svg-stage-title">Intelligence</text>
+            <text x="30" y="630" class="svg-stage-title">Serving</text>
+            <text x="30" y="735" class="svg-stage-title">Interface</text>
+            <text x="30" y="815" class="svg-stage-title">Output</text>
+
+            <!-- STAGE 1: DATA SOURCE -->
+            <g onclick="selectPipelineStage('data_source')">
+              <rect x="360" y="35" width="360" height="64" rx="14" fill="#ede9fe" class="svg-node-box"/>
+              <text x="540" y="63" class="svg-text-primary">Live Railway Telemetry Streams</text>
+              <text x="540" y="83" class="svg-text-secondary">RTIS GPS • Electronic Interlocking • Halt Weather • Station Logs</text>
+            </g>
+
+            <!-- Down Arrow 1 -> 2 -->
+            <path d="M 540 99 L 540 160" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+
+            <!-- STAGE 2: PROCESSING -->
+            <g onclick="selectPipelineStage('processing')">
+              <rect x="360" y="160" width="360" height="64" rx="14" fill="#dcfce7" class="svg-node-box"/>
+              <text x="540" y="188" class="svg-text-primary">Ingestion & Map-Matching Pipeline</text>
+              <text x="540" y="208" class="svg-text-secondary">Kalman GPS Filtering • Spatial Map-Matching • Anomaly Detection</text>
+            </g>
+
+            <!-- Down Arrow 2 -> 3 -->
+            <path d="M 540 224 L 540 285" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+
+            <!-- STAGE 3: STORAGE -->
+            <g onclick="selectPipelineStage('storage')">
+              <rect x="340" y="285" width="400" height="66" rx="14" fill="#fef9c3" class="svg-node-box"/>
+              <text x="540" y="313" class="svg-text-primary">RailPulse Relational Database</text>
+              <text x="540" y="334" class="svg-text-secondary">PostgreSQL + PostGIS (Master Track Graph & Historical Run Warehouse)</text>
+            </g>
+
+            <!-- Down Arrow 3 -> 4 (Container) -->
+            <path d="M 540 351 L 540 395" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+
+            <!-- STAGE 4: INTELLIGENCE ENGINE CONTAINER -->
+            <rect x="230" y="395" width="620" height="155" rx="18" fill="#ffedd5" stroke="#1e293b" stroke-width="2"/>
+            <text x="540" y="423" class="svg-text-primary" style="font-size: 17px; font-weight: 800;">
+              RailPulse 3-Layer Intelligent Engine
+            </text>
+
+            <!-- Layer 1 Subnode -->
+            <g onclick="selectPipelineStage('layer1')">
+              <rect x="255" y="442" width="165" height="80" rx="10" fill="#fef3c7" class="svg-node-box"/>
+              <text x="337" y="473" class="svg-text-primary" style="font-size: 13.5px;">Layer 1: Behaviour</text>
+              <text x="337" y="493" class="svg-text-secondary" style="font-size: 11px;">Dwell & Recovery DNA</text>
+            </g>
+
+            <!-- Bidirectional weights arrow -->
+            <path d="M 420 482 L 480 482" class="svg-dashed-arrow" marker-start="url(#arrow-bi-l)" marker-end="url(#arrow-bi-r)"/>
+            <text x="450" y="470" class="svg-arrow-text">weights</text>
+
+            <!-- Layer 3 Subnode -->
+            <g onclick="selectPipelineStage('layer3')">
+              <rect x="480" y="442" width="170" height="80" rx="10" fill="#fed7aa" class="svg-node-box"/>
+              <text x="565" y="473" class="svg-text-primary" style="font-size: 13.5px;">Layer 3: Dynamic ML</text>
+              <text x="565" y="493" class="svg-text-secondary" style="font-size: 11px;">LightGBM / PyTorch ETA</text>
+            </g>
+
+            <!-- Arrow Layer 3 -> Layer 2 -->
+            <path d="M 650 482 L 695 482" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+
+            <!-- Layer 2 Subnode -->
+            <g onclick="selectPipelineStage('layer2')">
+              <rect x="695" y="442" width="135" height="80" rx="10" fill="#fee2e2" class="svg-node-box"/>
+              <text x="762" y="473" class="svg-text-primary" style="font-size: 13px;">Layer 2: Verify</text>
+              <text x="762" y="493" class="svg-text-secondary" style="font-size: 10.5px;">Headway & Collision</text>
+            </g>
+
+            <!-- Down Arrow 4 -> 5 -->
+            <path d="M 540 550 L 540 598" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+
+            <!-- STAGE 5: SERVING TIER -->
+            <g onclick="selectPipelineStage('redis_tier')">
+              <rect x="330" y="598" width="420" height="64" rx="14" fill="#e0f2fe" class="svg-node-box"/>
+              <text x="540" y="626" class="svg-text-primary">Redis High-Speed In-Memory Tier</text>
+              <text x="540" y="646" class="svg-text-secondary">Key-Value Hashes • Sorted Sets (PIDS) • Pub/Sub Streaming (&lt; 1.5ms)</text>
+            </g>
+
+            <!-- Down Arrows 5 -> 6 (Split into interfaces) -->
+            <path d="M 450 662 L 420 710" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+            <path d="M 630 662 L 660 710" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+
+            <!-- STAGE 6: INTERFACES -->
+            <g onclick="selectPipelineStage('api_interface')">
+              <rect x="310" y="710" width="220" height="52" rx="12" fill="#ede9fe" class="svg-node-box"/>
+              <text x="420" y="742" class="svg-text-primary" style="font-size: 14px;">FastAPI REST Gateway</text>
+            </g>
+            <g onclick="selectPipelineStage('ws_interface')">
+              <rect x="550" y="710" width="220" height="52" rx="12" fill="#ede9fe" class="svg-node-box"/>
+              <text x="660" y="742" class="svg-text-primary" style="font-size: 14px;">WebSocket Stream Server</text>
+            </g>
+
+            <!-- Converging Arrows 6 -> 7 -->
+            <path d="M 420 762 L 490 790" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+            <path d="M 660 762 L 590 790" class="svg-arrow-path" marker-end="url(#arrow-solid)"/>
+
+            <!-- STAGE 7: OUTPUT -->
+            <g onclick="selectPipelineStage('output_results')">
+              <rect x="320" y="790" width="440" height="52" rx="14" fill="#ffe4e6" class="svg-node-box"/>
+              <text x="540" y="822" class="svg-text-primary" style="font-size: 15.5px;">Verified Feasible ETA & Operational Guidance</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Interactive Logic Explainer Card -->
+        <div class="logic-breakdown-card" id="pipeline-explainer">
+          <div class="breakdown-header">
+            <h3 class="breakdown-title" id="stage-detail-title">Stage 4: RailPulse 3-Layer Intelligent Engine</h3>
+            <span class="breakdown-badge" id="stage-detail-badge">CORE COMPUTE PIPELINE</span>
+          </div>
+          <div class="breakdown-grid">
+            <div class="breakdown-item">
+              <span class="breakdown-label">Input Data</span>
+              <span class="breakdown-val" id="stage-detail-input">Raw telemetry, PostGIS graph topology, and Layer 1 historical dwell & recovery DNA weights.</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Computational Method</span>
+              <span class="breakdown-val" id="stage-detail-method">Gradient Boosted Decision Trees (LightGBM) infer arrival distributions, validated against block headway and track occupancy physics.</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Output Artifact</span>
+              <span class="breakdown-val" id="stage-detail-output">Verified ETA intervals (± confidence margin) and actionable dispatch recommendations.</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Operational Failure Prevented</span>
+              <span class="breakdown-val" id="stage-detail-failure">Prevents publishing operationally impossible arrival times that conflict with downstream rakes or block signals.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: DIAGRAM 2 - END-TO-END SYSTEM ARCHITECTURE GRAPH (SCREENSHOT 2 METHOD) -->
+    <section id="system-architecture" class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Distributed Architecture Topography</span>
+        <h2 class="section-title">End-to-End System Architecture Graph</h2>
+        <p class="section-subtitle">
+          A clean, spacious distributed system diagram featuring client pill capsules, database cylinders, decision diamonds, and labeled interconnects representing data and control flow.
+        </p>
+      </div>
+
+      <div class="diagram-container">
+        <!-- Spacious Architecture SVG Box -->
+        <div class="arch-svg-box">
+          <svg viewBox="0 0 1060 620" class="arch-svg-element" id="svg-architecture">
+            <!-- CLIENT PILLS (Top Row) -->
+            <g onclick="selectArchComponent('pwa')">
+              <rect x="100" y="30" width="200" height="54" rx="27" fill="#dcfce7" class="arch-pill-shape"/>
+              <text x="200" y="55" class="arch-node-title">Passenger Apps</text>
+              <text x="200" y="72" class="arch-node-sub">(IRCTC / NTES Mobile)</text>
+            </g>
+
+            <g onclick="selectArchComponent('pids')">
+              <rect x="430" y="30" width="200" height="54" rx="27" fill="#dcfce7" class="arch-pill-shape"/>
+              <text x="530" y="55" class="arch-node-title">Station PIDS</text>
+              <text x="530" y="72" class="arch-node-sub">(Platform Arrival Displays)</text>
+            </g>
+
+            <g onclick="selectArchComponent('dashboard')">
+              <rect x="760" y="30" width="210" height="54" rx="27" fill="#dcfce7" class="arch-pill-shape"/>
+              <text x="865" y="55" class="arch-node-title">Section Controller</text>
+              <text x="865" y="72" class="arch-node-sub">(Dispatch Web Cockpit)</text>
+            </g>
+
+            <!-- REAL-TIME COMMS (Yellow Rect) -->
+            <g onclick="selectArchComponent('comms')">
+              <rect x="30" y="140" width="180" height="66" rx="12" fill="#fef9c3" class="arch-box-shape"/>
+              <text x="120" y="168" class="arch-node-title">Real-Time Comms</text>
+              <text x="120" y="187" class="arch-node-sub">(WebSockets / PubSub)</text>
+            </g>
+
+            <!-- TELEMETRY INGESTION (Yellow Rect) -->
+            <g onclick="selectArchComponent('ingestion')">
+              <rect x="425" y="130" width="210" height="66" rx="12" fill="#fef9c3" class="arch-box-shape"/>
+              <text x="530" y="158" class="arch-node-title">Telemetry Ingestion</text>
+              <text x="530" y="177" class="arch-node-sub">(RTIS GPS / Signal Aspects)</text>
+            </g>
+
+            <!-- DECISION DIAMOND: Anomaly Detected? -->
+            <g onclick="selectArchComponent('decision')">
+              <polygon points="530,235 615,285 530,335 445,285" fill="#ede9fe" class="arch-diamond-shape"/>
+              <text x="530" y="280" class="arch-node-title" style="font-size: 11.5px;">Anomaly /</text>
+              <text x="530" y="297" class="arch-node-title" style="font-size: 11.5px;">Delay Spike?</text>
+            </g>
+
+            <!-- DATABASE CYLINDER 1: Redis In-Memory Cache (Left) -->
+            <g onclick="selectArchComponent('redis')">
+              <path d="M 115 310 L 115 365 C 115 382, 275 382, 275 365 L 275 310 Z" fill="#e0f2fe" class="arch-cylinder-shape"/>
+              <path d="M 115 365 C 115 382, 275 382, 275 365" fill="none" stroke="#1e293b" stroke-width="2"/>
+              <ellipse cx="195" cy="310" rx="80" ry="16" fill="#bae6fd" stroke="#1e293b" stroke-width="2"/>
+              <text x="195" y="338" class="arch-node-title" style="font-size: 13px;">Redis Cache Tier</text>
+              <text x="195" y="356" class="arch-node-sub">(train:{id}:eta • &lt; 1.5ms)</text>
+            </g>
+
+            <!-- BACKEND API GATEWAY (Orange Rect) -->
+            <g onclick="selectArchComponent('api')">
+              <rect x="440" y="375" width="180" height="66" rx="12" fill="#fed7aa" class="arch-box-shape"/>
+              <text x="530" y="403" class="arch-node-title">Backend API</text>
+              <text x="530" y="422" class="arch-node-sub">(FastAPI / Python Gateway)</text>
+            </g>
+
+            <!-- ML ETA ENGINE (Pink Rect) -->
+            <g onclick="selectArchComponent('ml_engine')">
+              <rect x="710" y="255" width="220" height="68" rx="12" fill="#ffe4e6" class="arch-box-shape"/>
+              <text x="820" y="283" class="arch-node-title">Layer 3: ML ETA Engine</text>
+              <text x="820" y="302" class="arch-node-sub">(LightGBM / PyTorch Model)</text>
+            </g>
+
+            <!-- DATABASE CYLINDER 2: Core Master DB (PostgreSQL + PostGIS) -->
+            <g onclick="selectArchComponent('postgres')">
+              <path d="M 435 500 L 435 560 C 435 578, 625 578, 625 560 L 625 500 Z" fill="#e0f2fe" class="arch-cylinder-shape"/>
+              <path d="M 435 560 C 435 578, 625 578, 625 560" fill="none" stroke="#1e293b" stroke-width="2"/>
+              <ellipse cx="530" cy="500" rx="95" ry="16" fill="#bae6fd" stroke="#1e293b" stroke-width="2"/>
+              <text x="530" y="528" class="arch-node-title" style="font-size: 13px;">Core Master DB</text>
+              <text x="530" y="546" class="arch-node-sub">(PostgreSQL + PostGIS Graph)</text>
+            </g>
+
+            <!-- DATABASE CYLINDER 3: Analytics Lake -->
+            <g onclick="selectArchComponent('lake')">
+              <path d="M 770 470 L 770 530 C 770 548, 940 548, 940 530 L 940 470 Z" fill="#e0f2fe" class="arch-cylinder-shape"/>
+              <path d="M 770 530 C 770 548, 940 548, 940 530" fill="none" stroke="#1e293b" stroke-width="2"/>
+              <ellipse cx="855" cy="470" rx="85" ry="16" fill="#bae6fd" stroke="#1e293b" stroke-width="2"/>
+              <text x="855" y="498" class="arch-node-title" style="font-size: 13px;">Analytics Data Lake</text>
+              <text x="855" y="516" class="arch-node-sub">(Historical Runs / Model Retraining)</text>
+            </g>
+
+            <!-- DWELL & BEHAVIOUR EXTRACTION (Yellow Rect) -->
+            <g onclick="selectArchComponent('dwell_proc')">
+              <rect x="20" y="475" width="200" height="66" rx="12" fill="#fef9c3" class="arch-box-shape"/>
+              <text x="120" y="503" class="arch-node-title">Data Ingestion Engine</text>
+              <text x="120" y="522" class="arch-node-sub">(Dwell & Anomaly Extraction)</text>
+            </g>
+
+            <!-- LABELED FLOW CONNECTORS (Crisp Orthogonal Lines) -->
+            <path d="M 170 84 L 170 110 L 120 110 L 120 140" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="145" y="104" class="arch-connector-label">Live Feeds</text>
+
+            <path d="M 230 84 L 230 115 L 470 115 L 470 130" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="350" y="110" class="arch-connector-label">Queries & Telemetry</text>
+
+            <path d="M 530 196 L 530 235" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="585" y="218" class="arch-connector-label">Check Threshold</text>
+
+            <!-- NO Branch -> Direct to Backend API -->
+            <path d="M 465 305 L 390 305 L 390 405 L 440 405" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="360" y="300" class="arch-connector-label">NO (Nominal)</text>
+
+            <!-- YES Branch -> Explode to ML Engine -->
+            <path d="M 615 285 L 710 285" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="660" y="278" class="arch-connector-label">YES (Micro-Halt)</text>
+
+            <!-- ML -> Backend API -->
+            <path d="M 820 323 L 820 408 L 620 408" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="740" y="402" class="arch-connector-label">Adaptive ETA</text>
+
+            <!-- ML -> Dispatcher -->
+            <path d="M 840 255 L 840 120 L 865 120 L 865 84" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="895" y="165" class="arch-connector-label">Incident Alerts</text>
+
+            <!-- API -> Redis Sync -->
+            <path d="M 440 385 L 350 385 L 350 345 L 275 345" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="360" y="340" class="arch-connector-label">Sync Cache (&lt;1.5ms)</text>
+
+            <!-- Redis -> Clients -->
+            <path d="M 160 310 L 160 215 L 210 215 L 210 84" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="210" y="240" class="arch-connector-label">Public Reads</text>
+
+            <path d="M 240 310 L 240 100 L 510 100 L 510 84" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="375" y="95" class="arch-connector-label">Platform Boards</text>
+
+            <!-- API -> PostgreSQL -->
+            <path d="M 530 441 L 530 490" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="570" y="468" class="arch-connector-label">Store Truth</text>
+
+            <!-- PostgreSQL -> Dwell Ingestion -->
+            <path d="M 435 540 L 220 540" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="320" y="534" class="arch-connector-label">Extract Topology</text>
+
+            <!-- Dwell Ingestion -> Lake -->
+            <path d="M 120 541 L 120 595 L 855 595 L 855 540" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="480" y="590" class="arch-connector-label">Batch Process & Store Historical Runs</text>
+
+            <!-- Lake -> ML Engine -->
+            <path d="M 855 470 L 855 323" class="arch-connector-line" marker-end="url(#arrow-solid)"/>
+            <text x="900" y="420" class="arch-connector-label">Train Models</text>
+          </svg>
+        </div>
+
+        <!-- Architecture Explainer Pane -->
+        <div class="logic-breakdown-card" id="arch-explainer">
+          <div class="breakdown-header">
+            <h3 class="breakdown-title" id="arch-detail-title">Component: Redis High-Speed In-Memory Cache</h3>
+            <span class="breakdown-badge" id="arch-detail-badge">SUB-1.5MS SERVING TIER</span>
+          </div>
+          <div class="breakdown-grid">
+            <div class="breakdown-item">
+              <span class="breakdown-label">Architectural Role</span>
+              <span class="breakdown-val" id="arch-detail-role">Shields the PostgreSQL master database by serving passenger apps and platform displays directly from memory.</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Supported Latency</span>
+              <span class="breakdown-val" id="arch-detail-latency">Sub-1.5 millisecond read latency under 100,000+ concurrent HTTP/WebSocket queries.</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Key Structures</span>
+              <span class="breakdown-val" id="arch-detail-keys">Hashes for active train states (`train:12301:eta`) and Sorted Sets for station platform boards (`station:PRYJ:arrivals`).</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Cache Invalidation Logic</span>
+              <span class="breakdown-val" id="arch-detail-inval">Automated TTL with selective key refresh triggered via Redis Pub/Sub whenever Layer 2 verifies an updated ETA.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: DUAL-MODE NETWORK TRAVERSAL LOGIC -->
+    <section id="dual-mode-traversal" class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Algorithmic Working Methodology</span>
+        <h2 class="section-title">Dual-Mode Railway Network Traversal Logic</h2>
+        <p class="section-subtitle">
+          How RailPulse balances extreme computational efficiency during normal operations with deep explainable micro-traversal when disruptions occur.
+        </p>
+      </div>
+
+      <!-- Mode 1 vs Mode 2 Comparative Cards -->
+      <div class="traversal-comparison">
+        <div class="mode-card mode-normal-card">
+          <div class="mode-header">
+            <h3>Mode 1: Normal Section Mode</h3>
+            <span class="mode-badge">Low Compute Overhead</span>
+          </div>
+          <div class="mode-formula">
+            T_section = Distance / V_mps + W_dwell(station)
+          </div>
+          <p class="mode-desc">
+            Applied when trains run nominally within scheduled tolerances. The model computes aggregate block section transit times without inspecting intermediate signal aspects or micro-climatic sensors.
+          </p>
+          <ul class="mode-points">
+            <li>Zero unnecessary CPU/memory expenditure across thousands of on-time trains.</li>
+            <li>Calculates ETAs in sub-millisecond batch operations.</li>
+            <li>Continuously monitors variance threshold: Δ = |T_live - T_predicted|.</li>
+          </ul>
+        </div>
+
+        <div class="mode-card mode-detailed-card">
+          <div class="mode-header">
+            <h3>Mode 2: Detailed Halt Traversal</h3>
+            <span class="mode-badge">High Precision Micro-Scan</span>
+          </div>
+          <div class="mode-formula">
+            T_total = ∑ [ T_segment,i + D_halt,i + ΔT_fog,i + ΔT_signal,i ]
+          </div>
+          <p class="mode-desc">
+            Triggered automatically when delay variance exceeds threshold (Δ &gt; 3 min) or when localized sensors alert. Explodes the section into individual halt nodes, evaluating micro-weather and speed restrictions.
+          </p>
+          <ul class="mode-points">
+            <li>Pinpoints the exact geographical source of disruption (e.g. 12 km fog valley).</li>
+            <li>Prevents propagating a localized halt delay uniformly across the entire corridor.</li>
+            <li>Forecasts realistic downstream speed recovery through Layer 1 buffer models.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Interactive Corridor Route Canvas -->
+      <div class="corridor-container">
+        <div class="corridor-controls">
+          <span class="corridor-title-tag">
+            High-Density Golden Quadrilateral Track Segment: <strong>NDLS ➔ CNB ➔ PRYJ ➔ DDU</strong>
+          </span>
+          <div class="mode-switch-btns">
+            <button id="btn-mode-normal" class="btn-mode-tab" onclick="switchCorridorMode('NORMAL')">
+              Mode 1: Normal Section Flow
+            </button>
+            <button id="btn-mode-detailed" class="btn-mode-tab active" onclick="switchCorridorMode('DETAILED')">
+              Mode 2: Detailed Halt Traversal (Active)
+            </button>
+          </div>
+        </div>
+
+        <!-- SVG Track Schematic Canvas -->
+        <svg id="corridor-svg" viewBox="0 0 1060 220" class="corridor-svg-canvas">
+          <!-- Main Line Rails -->
+          <path d="M 60 110 L 1000 110" class="track-base"/>
+          <path id="active-track-progress" d="M 60 110 L 590 110" class="track-active"/>
+
+          <!-- Station 1: NDLS -->
+          <g class="stn-node" transform="translate(60, 110)">
+            <circle r="18" class="stn-outer"/>
+            <circle r="10" class="stn-inner-done"/>
+            <text y="-28" class="stn-code-text">NDLS</text>
+            <text y="38" class="stn-name-text">New Delhi</text>
+            <text y="52" class="stn-time-text">Dep 16:50 (On Time)</text>
+          </g>
+
+          <!-- Station 2: CNB -->
+          <g class="stn-node" transform="translate(360, 110)">
+            <circle r="18" class="stn-outer"/>
+            <circle r="10" class="stn-inner-done"/>
+            <text y="-28" class="stn-code-text">CNB</text>
+            <text y="38" class="stn-name-text">Kanpur Central</text>
+            <text y="52" class="stn-time-text">Passed 21:35</text>
+          </g>
+
+          <!-- Intermediate Halts Group (Exploded in Mode 2) -->
+          <g id="halts-layer" class="intermediate-group visible">
+            <!-- Halt 1: Rooma -->
+            <g class="halt-node-group" transform="translate(460, 110)" onclick="inspectHaltLogic('ROOMA')">
+              <circle r="12" class="halt-outer-ring"/>
+              <circle r="6" class="halt-dot-normal"/>
+              <text y="-20" class="halt-name-tag">H1: Rooma</text>
+              <text y="30" class="halt-meta-tag">Clear • 110 km/h</text>
+            </g>
+
+            <!-- Halt 2: Bindki Road (Anomaly Site) -->
+            <g class="halt-node-group" transform="translate(590, 110)" onclick="inspectHaltLogic('BINDKI')">
+              <circle r="14" class="halt-outer-ring" stroke="#ea580c" stroke-width="3"/>
+              <circle r="7" class="halt-dot-alert"/>
+              <text y="-22" class="halt-name-tag" fill="#c2410c">H2: Bindki Road</text>
+              <text y="32" class="halt-meta-tag" fill="#c2410c" id="bindki-label">Dense Fog • TSR 30</text>
+            </g>
+
+            <!-- Halt 3: Fatehpur -->
+            <g class="halt-node-group" transform="translate(690, 110)" onclick="inspectHaltLogic('FATEHPUR')">
+              <circle r="12" class="halt-outer-ring"/>
+              <circle r="6" class="halt-dot-recov"/>
+              <text y="-20" class="halt-name-tag">H3: Fatehpur</text>
+              <text y="30" class="halt-meta-tag">Recovery • 90 km/h</text>
+            </g>
+          </g>
+
+          <!-- Station 3: PRYJ -->
+          <g class="stn-node" transform="translate(790, 110)">
+            <circle r="18" class="stn-outer"/>
+            <circle r="10" class="stn-inner-active"/>
+            <text y="-28" class="stn-code-text">PRYJ</text>
+            <text y="38" class="stn-name-text">Prayagraj Jn</text>
+            <text y="52" class="stn-time-text" id="eta-pryj-text">ETA 23:48 (+14m)</text>
+          </g>
+
+          <!-- Station 4: DDU -->
+          <g class="stn-node" transform="translate(1000, 110)">
+            <circle r="18" class="stn-outer"/>
+            <circle r="10" class="stn-inner-next"/>
+            <text y="-28" class="stn-code-text">DDU</text>
+            <text y="38" class="stn-name-text">Pt. Deen Dayal Upadhyaya</text>
+            <text y="52" class="stn-time-text" id="eta-ddu-text">ETA 01:52 (+11m)</text>
+          </g>
+
+          <!-- Moving Train Marker -->
+          <g id="train-marker" class="train-marker-group" transform="translate(565, 110)">
+            <rect x="-18" y="-12" width="36" height="24" rx="6" class="train-hull"/>
+            <text x="0" y="4" style="font-size: 14px; text-anchor: middle;">🚆</text>
+            <text x="0" y="-18" class="train-speed-label" id="train-live-speed">42 km/h</text>
+          </g>
+        </svg>
+
+        <div class="corridor-explanation" id="corridor-status-bar">
+          <span>Active Investigation: <strong>Halt 2 (Bindki Road)</strong> localized river-basin fog imposes 30 km/h TSR across KM 1020-1032.</span>
+          <span style="font-style: italic; color: #64748b;">Click any halt node on the track above to inspect localized micro-weather logic.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: 3-LAYER COMPUTATIONAL INTELLIGENCE ENGINE -->
+    <section id="three-layer-engine" class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Mathematical & Rulebook Foundations</span>
+        <h2 class="section-title">The 3-Layer Prediction & Verification Architecture</h2>
+        <p class="section-subtitle">
+          How RailPulse decouples statistical empirical training, machine learning time-series inference, and railway physical safety constraints.
+        </p>
+      </div>
+
+      <div class="three-layers-grid">
+        <!-- Layer 1 Box -->
+        <div class="layer-box layer-box-1">
+          <span class="layer-watermark">01</span>
+          <span class="layer-role">Statistical & Empirical Model</span>
+          <h3 class="layer-title">Layer 1: Behaviour Analysis</h3>
+          <div class="layer-math">
+            W_dwell = f(Train_type, Station_category, Day_of_week)
+          </div>
+          <p class="layer-text">
+            Learns the empirical behavioural DNA of trains and stations from historical archives. A premium Rajdhani express at a terminal junction has fundamentally different dwell characteristics than a passenger rake during morning peak hours.
+          </p>
+          <div class="layer-flow-tag">
+            OUTPUT: Behavioural Weight Vector (W_dwell, W_recovery)
+          </div>
+        </div>
+
+        <!-- Layer 3 Box -->
+        <div class="layer-box layer-box-3">
+          <span class="layer-watermark">03</span>
+          <span class="layer-role">Gradient Boosted Time-Series Model</span>
+          <h3 class="layer-title">Layer 3: Dynamic ML ETA Model</h3>
+          <div class="layer-math">
+            P(ETA_t) = ML(GPS_coords, Speed, Weather_matrix, W_layer1)
+          </div>
+          <p class="layer-text">
+            Continuous regression model (LightGBM/PyTorch) ingesting live RTIS telemetry, instantaneous speed, Layer 1 weights, and micro-weather indices (visibility, rain adhesion). Outputs probabilistic arrival distributions with confidence scores.
+          </p>
+          <div class="layer-flow-tag">
+            OUTPUT: Raw Probabilistic Forecast: PRYJ 23:48 ± 2.1m (92% Conf)
+          </div>
+        </div>
+
+        <!-- Layer 2 Box -->
+        <div class="layer-box layer-box-2">
+          <span class="layer-watermark">02</span>
+          <span class="layer-role">Physical Railway Safety Rulebook</span>
+          <h3 class="layer-title">Layer 2: Constraint Verification</h3>
+          <div class="layer-math">
+            ∀ rakes (A, B): t_arrival(B) - t_arrival(A) ≥ Headway_min
+          </div>
+          <p class="layer-text">
+            Enforces railway physical realities. Evaluates block section availability, braking deceleration curves, and platform conflicts. If the ML model predicts an ETA that would violate minimum headway, Layer 2 rejects it and computes feasible precedence.
+          </p>
+          <div class="layer-flow-tag">
+            OUTPUT: Verified Feasible ETA & Safe Platform Routing
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: STORAGE PARADIGM: POSTGRESQL VS REDIS -->
+    <section id="storage-paradigm" class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Data Engineering Alignment</span>
+        <h2 class="section-title">Storage Paradigm: Main Database vs. Redis In-Memory Tier</h2>
+        <p class="section-subtitle">
+          The architectural reason RailPulse maintains sub-millisecond query responses under nationwide load without risking persistent database failure.
+        </p>
+      </div>
+
+      <div class="storage-comparison-grid">
+        <!-- PostgreSQL Card -->
+        <div class="storage-card storage-pg">
+          <div class="storage-header">
+            <span class="storage-icon">💾</span>
+            <div>
+              <h3>Master Database (PostgreSQL + PostGIS)</h3>
+              <span class="storage-badge">Persistent Source of Truth</span>
+            </div>
+          </div>
+          <p class="layer-text">
+            Strictly private and shielded from public traffic. Stores static and slow-changing operational assets: master timetable schedules, PostGIS track line strings, station platform track layouts, crew shift rosters, and historical run logs.
+          </p>
+          <div class="storage-visual-box">
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Data Format</span>
+              <span class="storage-visual-val">Relational Tables + PostGIS LineStrings</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Access Pattern</span>
+              <span class="storage-visual-val">Private Batch Reads & Offline Model Training</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Concurrency Target</span>
+              <span class="storage-visual-val">Internal Microservices (Zero Public Exposure)</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Durability Guarantee</span>
+              <span class="storage-visual-val">ACID Compliant Disk Persistence</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Redis Card -->
+        <div class="storage-card storage-redis">
+          <div class="storage-header">
+            <span class="storage-icon">⚡</span>
+            <div>
+              <h3>Redis In-Memory Key-Value Tier</h3>
+              <span class="storage-badge">High-Throughput Public Serving</span>
+            </div>
+          </div>
+          <p class="layer-text">
+            Holds transient live state in RAM to serve tens of millions of public passenger app queries (NTES, IRCTC) and platform boards with sub-1.5ms read latency, completely isolating the PostgreSQL disk from read spikes.
+          </p>
+          <div class="storage-visual-box">
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Data Format</span>
+              <span class="storage-visual-val">In-Memory Hashes & Sorted Sets</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Read Latency</span>
+              <span class="storage-visual-val">&lt; 1.5 ms Direct from RAM</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Throughput Capacity</span>
+              <span class="storage-visual-val">100,000+ Concurrent Queries / Sec</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Refresh Trigger</span>
+              <span class="storage-visual-val">Pub/Sub Stream from Layer 2 Verification</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: WHAT-IF INCIDENT SIMULATION & PRECEDENCE LOGIC -->
+    <section id="incident-sandbox" class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Interactive Rulebook Verification</span>
+        <h2 class="section-title">Incident Injection & Conflict Resolution Sandbox</h2>
+        <p class="section-subtitle">
+          Select an operational disruption to observe the exact logic steps executed by the engine: anomaly detection, mode switching, dynamic speed restriction, and verified ETA propagation.
+        </p>
+      </div>
+
+      <div class="sandbox-method-grid">
+        <!-- Incident Trigger Buttons -->
+        <div class="incident-picker">
+          <button class="incident-btn active" onclick="triggerIncidentLogic('FOG')">
+            <div class="incident-btn-top">
+              <span class="incident-name">🌫️ Dense Fog at Bindki Road</span>
+              <span class="badge-mini" style="background: #fef9c3;">Level 2 Moderate</span>
+            </div>
+            <p class="incident-desc">Visibility drops to 70m. Triggers Fog-Safe Restriction (30 km/h) and explodes section into Detailed Halt Traversal.</p>
+          </button>
+
+          <button class="incident-btn" onclick="triggerIncidentLogic('MAINTENANCE')">
+            <div class="incident-btn-top">
+              <span class="incident-name">🚧 Unscheduled Track Block Line 1</span>
+              <span class="badge-mini" style="background: #ffedd5;">Level 3 Major</span>
+            </div>
+            <p class="incident-desc">Emergency track repair at KM 1040. Layer 2 re-evaluates clearance and routes train via Loop Line.</p>
+          </button>
+
+          <button class="incident-btn" onclick="triggerIncidentLogic('SIGNAL')">
+            <div class="incident-btn-top">
+              <span class="incident-name">🚦 Signal 408 Intermittent Delay</span>
+              <span class="badge-mini" style="background: #dcfce7;">Level 1 Minor</span>
+            </div>
+            <p class="incident-desc">Caution aspect encountered. +4 min delay is absorbed by downstream Layer 1 sectional recovery buffer.</p>
+          </button>
+
+          <button class="incident-btn" onclick="triggerIncidentLogic('DISASTER')">
+            <div class="incident-btn-top">
+              <span class="incident-name">🚨 Line Rupture / Emergency Halt</span>
+              <span class="badge-mini" style="background: #ffe4e6;">Level 4 Safety Critical</span>
+            </div>
+            <p class="incident-desc">Clearance time unknown. Enforces safety rule: ETA is marked 'INDETERMINATE' to prevent false information.</p>
+          </button>
+
+          <button class="incident-btn" onclick="triggerIncidentLogic('NORMAL')" style="border-style: dashed;">
+            <div class="incident-btn-top">
+              <span class="incident-name">🔄 Restore Normal Timetable Flow</span>
+              <span class="badge-mini">Nominal</span>
+            </div>
+            <p class="incident-desc">Clears all incident injections and returns to Mode 1 aggregate section traversal.</p>
+          </button>
+        </div>
+
+        <!-- Terminal Execution Trace -->
+        <div class="terminal-card">
+          <div class="terminal-top">
+            <h4>Live Computational Decision Trace</h4>
+            <span class="breakdown-badge" id="terminal-scenario-tag">SCENARIO: DENSE FOG</span>
+          </div>
+
+          <div class="terminal-view" id="logic-terminal">
+            <div><span class="t-info">[INGESTION]</span> RTIS GPS received: Lat 26.0461, Lng 80.6128. Speed 88 km/h.</div>
+            <div><span class="t-warn">[MONITOR]</span> Halt 2 (Bindki Road) weather sensor alert: Visibility = 70m (Threshold &lt; 150m).</div>
+            <div><span class="t-accent">[GRAPH_ENGINE]</span> Delta threshold breached. Section CNB-PRYJ exploded into Mode 2 (Detailed Halt Traversal).</div>
+            <div><span class="t-accent">[LAYER_3_ML]</span> Ingested localized halt matrix: Imposing 30 km/h TSR across KM 1020-1032.</div>
+            <div><span class="t-accent">[LAYER_2_VERIFY]</span> Track headway checked against Goods 3012. Minimum separation: 4.8 min (SAFE).</div>
+            <div><span class="t-success">[VERIFIED_ETA]</span> PRYJ revised to 23:48 (+14m). Layer 1 calculates 3m recovery between Fatehpur & Sirathu.</div>
+            <div><span class="t-success">[REDIS_SYNC]</span> Published updated hash `train:12301:eta` to Redis cluster in 1.14ms.</div>
+          </div>
+
+          <div class="decision-outcome" id="decision-outcome-box">
+            <strong>Operational Verdict:</strong> Feasible ETA computed. Goods rake 3012 held at Bindki Loop Line to prevent blocking Rajdhani express.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>RailPulse</strong> — Smart India Hackathon Innovation Platform for Indian Railways
+      </div>
+      <div>
+        Core Logic: Time-Dependent Graph Traversal • 3-Layer Computational Decoupling • Redis/PostgreSQL Tiered Storage
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

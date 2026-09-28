@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dual-Mode Network Traversal & Spatial Graph | RailPulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Sticky Navigation Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="4" y="3" width="16" height="16" rx="2"/>
+            <path d="M4 11h16M12 3v8M8 19l-2 3M16 19l2 3M9 15h.01M15 15h.01"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-title">RailPulse <span class="brand-tag">Traversal</span></span>
+          <span class="brand-subtitle">Dual-Mode Network Graph Engine</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Overview & Architecture</a>
+        <a href="layer1.html">Layer 1: Behaviour</a>
+        <a href="layer2.html">Layer 2: Safety & Collision</a>
+        <a href="layer3.html">Layer 3: Dynamic ML</a>
+        <a href="traversal.html" class="active">Dual-Mode Traversal</a>
+        <a href="storage.html">Storage Paradigm</a>
+      </nav>
+
+      <span class="badge-sih">Spatial Graph Topology</span>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- PAGE HERO -->
+    <section class="hero-methodology">
+      <span class="hero-pill">Spatial Graph Topology</span>
+      <h1 class="hero-heading">Dual-Mode Railway Network Traversal Logic</h1>
+      <p class="hero-lead">
+        Tracking over 13,000 daily trains across thousands of individual halt signals in microscopic detail at all times would overwhelm compute resources. <strong>RailPulse's core algorithmic innovation is Dual-Mode Graph Traversal</strong>: calculating aggregate section times during nominal flow, while automatically exploding into micro-halt inspection the instant delay variance or a localized anomaly is detected.
+      </p>
+
+      <div class="principles-grid">
+        <div class="principle-box">
+          <span class="principle-num">Mode 01</span>
+          <h3 class="principle-title">Normal Section Mode</h3>
+          <p class="principle-desc">
+            Computes aggregate section-to-section transit times. Sub-millisecond compute cost, highly scalable nationwide across on-time trains.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <span class="principle-num">The Trigger</span>
+          <h3 class="principle-title">Dynamic Anomaly Branching</h3>
+          <p class="principle-desc">
+            Triggered when delay variance exceeds threshold (Δ &gt; 3 min), or when hyper-local halt sensors report fog, heavy rain, or signal aspect drops.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <span class="principle-num">Mode 02</span>
+          <h3 class="principle-title">Detailed Halt Traversal</h3>
+          <p class="principle-desc">
+            Explodes the section into intermediate halts, signal posts, and sidings. Pinpoints the exact root-cause bottleneck and forecasts downstream recovery.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISUAL COMPARISON OF THE TWO MODES -->
+    <section class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Structural Visual Comparison</span>
+        <h2 class="section-title">Visualizing the Graph Transformation: Aggregate vs Exploded</h2>
+        <p class="section-subtitle">
+          How the graph representation changes from a single edge to an exploded sequential sub-graph.
+        </p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="pipeline-svg-box">
+          <svg viewBox="0 0 940 380" class="pipeline-svg-element">
+            <!-- TOP HALF: MODE 1 (AGGREGATE) -->
+            <text x="40" y="45" class="svg-text-primary" style="font-size: 15px; font-weight: 800; text-anchor: start;">
+              Mode 1: Normal Section Mode (Nominal Operational Flow)
+            </text>
+
+            <!-- Station A Node -->
+            <g transform="translate(140, 95)">
+              <circle r="22" fill="#dcfce7" stroke="#1e293b" stroke-width="2.5"/>
+              <text y="5" class="svg-text-primary" style="font-size: 13px;">CNB</text>
+              <text y="40" class="svg-text-secondary" style="font-size: 11px;">Kanpur Central</text>
+            </g>
+
+            <!-- Single Aggregate Line -->
+            <path d="M 165 95 L 755 95" stroke="#1e293b" stroke-width="4" marker-end="url(#arrow-solid)"/>
+            <text x="460" y="85" style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; fill: #1e293b; text-anchor: middle;">
+              Section CNB ➔ PRYJ (194 km Single Aggregate Edge • MPS 130 km/h)
+            </text>
+            <text x="460" y="125" style="font-family: var(--font-sans); font-size: 11.5px; fill: #166534; font-weight: 700; text-anchor: middle;">
+              ✓ Compute Time: &lt; 0.2ms | Variance: Normal (Δ = 0 min)
+            </text>
+
+            <!-- Station B Node -->
+            <g transform="translate(780, 95)">
+              <circle r="22" fill="#dcfce7" stroke="#1e293b" stroke-width="2.5"/>
+              <text y="5" class="svg-text-primary" style="font-size: 13px;">PRYJ</text>
+              <text y="40" class="svg-text-secondary" style="font-size: 11px;">Prayagraj Jn</text>
+            </g>
+
+            <!-- Divider Line with Anomaly Diamond -->
+            <line x1="40" y1="180" x2="900" y2="180" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6,6"/>
+
+            <!-- BOTTOM HALF: MODE 2 (DETAILED HALT EXPLOSION) -->
+            <text x="40" y="215" class="svg-text-primary" style="font-size: 15px; font-weight: 800; text-anchor: start;">
+              Mode 2: Detailed Halt Traversal (Exploded when Fog Anomaly Detected)
+            </text>
+
+            <!-- CNB Node -->
+            <g transform="translate(100, 280)">
+              <circle r="18" fill="#dcfce7" stroke="#1e293b" stroke-width="2"/>
+              <text y="4" class="svg-text-primary" style="font-size: 11px;">CNB</text>
+            </g>
+
+            <path d="M 120 280 L 240 280" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-solid)"/>
+
+            <!-- Halt 1: Rooma -->
+            <g transform="translate(260, 280)">
+              <circle r="14" fill="#dcfce7" stroke="#1e293b" stroke-width="2"/>
+              <text y="4" style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; fill: #1e293b; text-anchor: middle;">H1</text>
+              <text y="30" class="svg-text-secondary" style="font-size: 10px;">Rooma</text>
+              <text y="44" style="font-family: var(--font-mono); font-size: 9px; fill: #166534; text-anchor: middle;">110 km/h</text>
+            </g>
+
+            <path d="M 280 280 L 400 280" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-solid)"/>
+
+            <!-- Halt 2: Bindki Road (Anomaly Site) -->
+            <g transform="translate(430, 280)">
+              <circle r="20" fill="#ffedd5" stroke="#ea580c" stroke-width="3"/>
+              <text y="4" style="font-family: var(--font-mono); font-size: 11px; font-weight: 800; fill: #c2410c; text-anchor: middle;">H2</text>
+              <text y="34" style="font-family: var(--font-sans); font-size: 11px; font-weight: 800; fill: #c2410c; text-anchor: middle;">Bindki Road</text>
+              <text y="50" style="font-family: var(--font-mono); font-size: 9.5px; font-weight: 700; fill: #ea580c; text-anchor: middle;">🌫️ Fog • TSR 30 km/h</text>
+            </g>
+
+            <path d="M 455 280 L 590 280" stroke="#ea580c" stroke-width="2.5" marker-end="url(#arrow-solid)"/>
+
+            <!-- Halt 3: Fatehpur -->
+            <g transform="translate(615, 280)">
+              <circle r="14" fill="#e0f2fe" stroke="#1e293b" stroke-width="2"/>
+              <text y="4" style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; fill: #1e293b; text-anchor: middle;">H3</text>
+              <text y="30" class="svg-text-secondary" style="font-size: 10px;">Fatehpur</text>
+              <text y="44" style="font-family: var(--font-mono); font-size: 9px; fill: #0284c7; text-anchor: middle;">90 km/h Recov</text>
+            </g>
+
+            <path d="M 635 280 L 780 280" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-solid)"/>
+
+            <!-- PRYJ Node -->
+            <g transform="translate(800, 280)">
+              <circle r="18" fill="#fef9c3" stroke="#1e293b" stroke-width="2"/>
+              <text y="4" class="svg-text-primary" style="font-size: 11px;">PRYJ</text>
+              <text y="30" class="svg-text-secondary" style="font-size: 10px;">Prayagraj</text>
+              <text y="44" style="font-family: var(--font-mono); font-size: 9px; fill: #d97706; text-anchor: middle;">ETA +14m</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY MICRO-HALT ISOLATION MATTERS -->
+    <section class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Operational Insight</span>
+        <h2 class="section-title">Why Micro-Halt Isolation Prevents False Corridor Delays</h2>
+      </div>
+
+      <div class="principles-grid">
+        <div class="principle-box">
+          <h3 class="principle-title">1. Isolates Geography</h3>
+          <p class="principle-desc">
+            River valleys (like the Ganga-Yamuna basin near Bindki) frequently experience dense fog while Kanpur and Prayagraj have clear skies. Mode 2 isolates the exact 12 km stretch rather than penalizing the whole 194 km.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <h3 class="principle-title">2. Downstream Recovery Tracking</h3>
+          <p class="principle-desc">
+            Because the system knows the fog clears after KM 1032, it calculates that the loco-pilot can accelerate back to 110 km/h between Fatehpur and Sirathu, recovering 3.2 minutes before Prayagraj.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <h3 class="principle-title">3. Accurate Platform Slots</h3>
+          <p class="principle-desc">
+            Station superintendents at Prayagraj receive an exact arrival window (+14 min instead of a speculative +45 min), preserving platform 1 for the Rajdhani without causing platform holding deadlocks.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div><strong>RailPulse</strong> — Smart India Hackathon Operational Intelligence</div>
+      <div>Dual-Mode Graph Traversal: Section Aggregation • Dynamic Anomaly Explosion • Halt Sensor Inspection</div>
+    </div>
+  </footer>
+
+</body>
+</html>

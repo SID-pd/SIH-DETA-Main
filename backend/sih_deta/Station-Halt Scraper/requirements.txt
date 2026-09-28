@@ -1,0 +1,4 @@
+# Minimal zero-dependency core; works natively with Python 3.8+ standard library
+# Optional enhancements:
+requests>=2.28.0
+beautifulsoup4>=4.11.0

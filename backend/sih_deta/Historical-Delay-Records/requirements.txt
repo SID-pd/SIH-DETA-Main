@@ -1,0 +1,9 @@
+# Python Standard Library only (zero third-party dependencies)
+# Built-in modules used:
+# - urllib
+# - sqlite3
+# - re
+# - json
+# - math
+# - datetime
+# - unittest

@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIH-DETA | Indian Railways Dynamic ETA Prediction System</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚆</text></svg>">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #111827;
+      --bg-card: #1a2234;
+      --bg-card-hover: #222d44;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border-color: #2e3a52;
+      --railway-blue: #3b82f6;
+      --railway-blue-glow: rgba(59, 130, 246, 0.25);
+      --railway-gold: #f59e0b;
+      --railway-gold-glow: rgba(245, 158, 11, 0.25);
+      --success-green: #10b981;
+      --success-green-glow: rgba(16, 185, 129, 0.2);
+      --warning-amber: #f97316;
+      --accent-purple: #8b5cf6;
+      --accent-crimson: #ef4444;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation */
+    header.navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 2.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-logo {
+      font-size: 1.8rem;
+      line-height: 1;
+      background: linear-gradient(135deg, #f59e0b, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-text h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-sih {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: var(--railway-gold);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--railway-blue);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--success-green-glow);
+      color: var(--success-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success-green);
+      box-shadow: 0 0 8px var(--success-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 4rem;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid var(--border-color);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: #93c5fd;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h2 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(180deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 820px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+    }
+
+    /* Overall Progress Bar Card */
+    .overall-progress-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .overall-progress-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #10b981, #f59e0b);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .progress-header h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .progress-header p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .progress-score {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--success-green);
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .progress-score span {
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    .progress-bar-container {
+      background: #0f172a;
+      height: 14px;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      border: 1px solid #1e293b;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 78%;
+      background: linear-gradient(90deg, #3b82f6 0%, #10b981 100%);
+      border-radius: 999px;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+      transition: width 1s ease-in-out;
+    }
+
+    .progress-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .breakdown-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .breakdown-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .breakdown-value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Key Statistics Metric Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-3px);
+      border-color: #3b82f6;
+    }
+
+    .metric-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .metric-value {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .metric-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .metric-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Section Headings */
+    .section-header {
+      margin-bottom: 2rem;
+    }
+
+    .section-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--railway-blue);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-top: 0.35rem;
+    }
+
+    /* Module Filter Controls */
+    .filter-bar {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--railway-blue);
+      color: #fff;
+      border-color: var(--railway-blue);
+    }
+
+    /* Module Grid */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .module-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.25s ease;
+    }
+
+    .module-card:hover {
+      background: var(--bg-card-hover);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .module-top {
+      margin-bottom: 1.25rem;
+    }
+
+    .module-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .module-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--railway-gold);
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .badge-status {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-done {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-in-progress {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .badge-planned {
+      background: rgba(139, 92, 246, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    .module-title {
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-folder {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #38bdf8;
+      background: #0f172a;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.85rem;
+      border: 1px solid #1e293b;
+    }
+
+    .module-desc {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+    }
+
+    .module-highlights {
+      list-style: none;
+      margin-bottom: 1.25rem;
+    }
+
+    .module-highlights li {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .module-highlights li::before {
+      content: "▹";
+      color: var(--railway-blue);
+      font-weight: bold;
+    }
+
+    .module-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .module-artifacts {
+      font-family: monospace;
+      color: #94a3b8;
+    }
+
+    /* Architecture Visual Diagram */
+    .architecture-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .arch-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .arch-tier {
+      border: 1px solid #283548;
+      background: #0d1322;
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+    }
+
+    .arch-tier-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--railway-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .arch-boxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .arch-box {
+      background: #162032;
+      border: 1px solid #2d3b55;
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      text-align: center;
+    }
+
+    .arch-box h5 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 4px;
+    }
+
+    .arch-box p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .arch-arrow {
+      text-align: center;
+      font-size: 1.5rem;
+      color: var(--railway-blue);
+      margin: -0.5rem 0;
+    }
+
+    /* Domain Reality & Constraints */
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .domain-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+    }
+
+    .domain-card h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .domain-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .precedence-list {
+      list-style: decimal inside;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .precedence-list li {
+      padding: 4px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+    }
+
+    .precedence-list li:last-child {
+      border-bottom: none;
+    }
+
+    .precedence-list strong {
+      color: #fff;
+    }
+
+    /* Beacon & Watchdog Callout */
+    .beacon-callout {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .beacon-icon {
+      font-size: 3.5rem;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+    }
+
+    .beacon-info {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .beacon-info h4 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .beacon-info p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .beacon-stats {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .b-stat {
+      background: #0f172a;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid #1e293b;
+    }
+
+    .b-stat-val {
+      font-weight: 700;
+      color: #10b981;
+      font-size: 1.1rem;
+    }
+
+    .b-stat-lbl {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Roadmap Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-color);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2rem;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--railway-blue);
+    }
+
+    .timeline-dot.done {
+      background: var(--success-green);
+      border-color: #064e3b;
+    }
+
+    .timeline-dot.next {
+      background: var(--railway-gold);
+      border-color: #78350f;
+    }
+
+    .timeline-content h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      background: #090d16;
+    }
+
+    footer a {
+      color: var(--railway-blue);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header.navbar {
+        padding: 0.8rem 1rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero h2 {
+        font-size: 2rem;
+      }
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="navbar">
+    <a href="#" class="brand">
+      <span class="brand-logo">🚆</span>
+      <div class="brand-text">
+        <h1>SIH-DETA <span class="badge-sih">SIH Hackathon</span></h1>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#modules">7 Modules</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#domain-rules">Operational Reality</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+    </ul>
+    <div class="status-pill">
+      <span class="status-dot"></span>
+      Phase 1 & 2 Complete (78% Overall)
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Hero Section -->
+    <section class="hero" id="overview">
+      <div class="hero-eyebrow">
+        <span>🇮🇳 Smart India Hackathon (SIH)</span>
+        <span>•</span>
+        <span>Indian Railways AI / ML Platform</span>
+      </div>
+      <h2>Dynamic Estimated Time of Arrival (ETA)<br>Prediction System for Indian Railways</h2>
+      <p>
+        A multi-tiered, physics-informed, and data-driven train delay prediction platform.
+        Moving beyond naive <code>ETA = STA + Delay</code> by modeling track bottlenecks,
+        COA dispatching hierarchy, timetable slack recovery, and multi-horizon historical delay distributions.
+      </p>
+    </section>
+
+    <!-- Overall Progress Card -->
+    <div class="overall-progress-card">
+      <div class="progress-header">
+        <div>
+          <h3>System Development Progress</h3>
+          <p>4 Core Data Engineering & Telemetry Engines Complete • ML & Anomaly Pipelines Specified</p>
+        </div>
+        <div class="progress-score">
+          78% <span>Complete</span>
+        </div>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" style="width: 78%;"></div>
+      </div>
+      <div class="progress-breakdown">
+        <div class="breakdown-item">
+          <span class="breakdown-label">Data Layer</span>
+          <span class="breakdown-value" style="color: var(--success-green);">✓ 100% Ready</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Telemetry Engine</span>
+          <span class="breakdown-value" style="color: var(--success-green);">✓ 100% Ready</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Historical Mining</span>
+          <span class="breakdown-value" style="color: var(--success-green);">✓ 100% (6,930 Cycles)</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Weather & Anomalies</span>
+          <span class="breakdown-value" style="color: var(--railway-gold);">⚡ 60% (Schemas & Rules)</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">ETA ML Engine</span>
+          <span class="breakdown-value" style="color: var(--railway-blue);">⚙️ 45% (Formulations & Feature Vectors)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Metrics Grid -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon">🚉</div>
+        <div class="metric-value" style="color: #60a5fa;">8,990</div>
+        <div class="metric-label">Network Stations & Nodes</div>
+        <div class="metric-desc">8,697 geocoded (96.7% lat/long), 395 rail junctions, NSG/HG tiers</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">⏱️</div>
+        <div class="metric-value" style="color: #34d399;">420,345</div>
+        <div class="metric-label">Train Halt Records</div>
+        <div class="metric-desc">Complete timetable schedule events mapped across 7,132 trains</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">🚆</div>
+        <div class="metric-value" style="color: #f59e0b;">5,208+</div>
+        <div class="metric-label">Master Trains Cataloged</div>
+        <div class="metric-desc">5-digit IR numbering catalog (0xxxx to 9xxxx) with zones & routes</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">📈</div>
+        <div class="metric-value" style="color: #a78bfa;">6,930</div>
+        <div class="metric-label">Delay Crawling Cycles</div>
+        <div class="metric-desc">Phase 1 (90d) + Phase 2 (1y) successfully crawled with zero deadlocks</div>
+      </div>
+    </div>
+
+    <!-- Autonomous Crawler Beacon Status Callout -->
+    <div class="beacon-callout">
+      <div class="beacon-icon">🛡️</div>
+      <div class="beacon-info">
+        <h4>Autonomous Overnight Delay Crawler: GOAL COMPLETE</h4>
+        <p>
+          The custom Beacon Supervisor executed full unattended scraping across all Indian Railways train corridors.
+          Protected by automated deadlock-killing watchdogs, SQLite WAL mode, and sub-window partitioning.
+        </p>
+        <div class="beacon-stats">
+          <div class="b-stat">
+            <div class="b-stat-val">GOAL_COMPLETE</div>
+            <div class="b-stat-lbl">Beacon Status</div>
+          </div>
+          <div class="b-stat">
+            <div class="b-stat-val">3,465 + 3,465</div>
+            <div class="b-stat-lbl">90-Day & 1-Year Batches</div>
+          </div>
+          <div class="b-stat">
+            <div class="b-stat-val">0 Failed</div>
+            <div class="b-stat-lbl">Failure Rate</div>
+          </div>
+          <div class="b-stat">
+            <div class="b-stat-val">Zero-Hang</div>
+            <div class="b-stat-lbl">Deadlock Watchdog</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Showcase Section -->
+    <section class="section" id="modules">
+      <div class="section-header">
+        <span class="section-tag">Modular Architecture</span>
+        <h3 class="section-title">The 7 Specialized Components</h3>
+        <p class="section-subtitle">A decoupled pipeline feeding static topology, real-time dynamics, and historical features into machine learning models.</p>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterModules('all')">All Modules (7)</button>
+        <button class="filter-btn" onclick="filterModules('done')">Completed & Deployed (4)</button>
+        <button class="filter-btn" onclick="filterModules('in-progress')">In Development & Specified (3)</button>
+      </div>
+
+      <div class="modules-grid" id="modules-container">
+
+        <!-- Module 01 -->
+        <div class="module-card" data-status="done">
+          <div class="module-top">
+            <div class="module-meta">
+              <span class="module-num">MODULE 01</span>
+              <span class="badge-status badge-done">✓ COMPLETE</span>
+            </div>
+            <h4 class="module-title">Train Master & Static Schedules</h4>
+            <span class="module-folder">Train-Scraper/</span>
+            <p class="module-desc">Traverses the full 5-digit Indian Railways numbering space (0xxxx to 9xxxx) to index all operational trains, routes, classes, and detailed timetable stops.</p>
+            <ul class="module-highlights">
+              <li>Comprehensive 2-digit prefix crawler (00 to 99)</li>
+              <li>Datameet open railway GeoJSON & master dataset synchronization</li>
+              <li>Exports to SQLite (<code>trains.db</code>), CSV, and JSON</li>
+              <li>Zero external dependencies (Python standard library resilient requester)</li>
+            </ul>
+          </div>
+          <div class="module-footer">
+            <span class="module-artifacts">master_trains.csv • trains.db</span>
+            <span>5,208+ Trains</span>
+          </div>
+        </div>
+
+        <!-- Module 02 -->
+        <div class="module-card" data-status="done">
+          <div class="module-top">
+            <div class="module-meta">
+              <span class="module-num">MODULE 02</span>
+              <span class="badge-status badge-done">✓ COMPLETE</span>
+            </div>
+            <h4 class="module-title">Station & Network Topology</h4>
+            <span class="module-folder">Station-Halt Scraper/</span>
+            <p class="module-desc">Comprehensive nationwide railway station catalog with geospatial coordinates, NSG commercial category rankings, platform capacity, and junction connectivity.</p>
+            <ul class="module-highlights">
+              <li>8,990 network nodes (8,860 commercial + 130 freight/cabins)</li>
+              <li>8,697 geocoded with exact GPS Latitude/Longitude (96.7%)</li>
+              <li>395 converging junctions & 93 primary terminal hubs</li>
+              <li>420,345 scheduled train halt events across 7,132 trains</li>
+            </ul>
+          </div>
+          <div class="module-footer">
+            <span class="module-artifacts">stations_master.csv • stations.db</span>
+            <span>8,990 Stations</span>
+          </div>
+        </div>
+
+        <!-- Module 03 -->
+        <div class="module-card" data-status="done">
+          <div class="module-top">
+            <div class="module-meta">
+              <span class="module-num">MODULE 03</span>
+              <span class="badge-status badge-done">✓ COMPLETE</span>
+            </div>
+            <h4 class="module-title">Live Journey & Telemetry Tracker</h4>
+            <span class="module-folder">Live-Journey-Tracker/</span>
+            <p class="module-desc">Extracts instantaneous train delays, live GPS coords, expected platform allocations, and intermediate signaling cabins along the running section.</p>
+            <ul class="module-highlights">
+              <li>Live NTES / ConfirmTkt telemetry ingestion with exponential backoff</li>
+              <li>Micro-topology cabin extraction (e.g. Juhi Outer Cabin, Kanpur)</li>
+              <li>Kinematic drift rate calculation (<code>dΔt/dx</code> per 100 km)</li>
+              <li>Outer Home signal queuing & bottleneck detection algorithm</li>
+            </ul>
+          </div>
+          <div class="module-footer">
+            <span class="module-artifacts">live_telemetry.json • telemetry.db</span>
+            <span>Real-Time Ingestion</span>
+          </div>
+        </div>
+
+        <!-- Module 04 -->
+        <div class="module-card" data-status="done">
+          <div class="module-top">
+            <div class="module-meta">
+              <span class="module-num">MODULE 04</span>
+              <span class="badge-status badge-done">✓ COMPLETE</span>
+            </div>
+            <h4 class="module-title">Historical Delay Records & Punctuality</h4>
+            <span class="module-folder">Historical-Delay-Records/</span>
+            <p class="module-desc">Mines multi-horizon historical run records (90-day & 1-year) to extract timetable recovery slack, bottleneck compounding, and Markovian delay transitions.</p>
+            <ul class="module-highlights">
+              <li>Sectional delay delta math: <code>Δdelay = delay_arr(v) - delay_dep(u)</code></li>
+              <li>Identifies slack buffer sections vs saturated corridor bottlenecks</li>
+              <li>Markov delay state modeling (On-time, Minor, Moderate, Severe)</li>
+              <li>Autonomous overnight daemon supervisor with self-healing watchdog</li>
+            </ul>
+          </div>
+          <div class="module-footer">
+            <span class="module-artifacts">historical.db • crawler_beacon.json</span>
+            <span>6,930 Horizons Crawled</span>
+          </div>
+        </div>
+
+        <!-- Module 05 -->
+        <div class="module-card" data-status="in-progress">
+          <div class="module-top">
+            <div class="module-meta">
+              <span class="module-num">MODULE 05</span>
+              <span class="badge-status badge-in-progress">⚡ SPECIFIED</span>
+            </div>
+            <h4 class="module-title">Weather & Environmental Constraints</h4>
+            <span class="module-folder">Weather-Environment/</span>
+            <p class="module-desc">Integrates atmospheric and meteorological features that enforce legal G&SR speed limits and physical rail speed restrictions across corridors.</p>
+            <ul class="module-highlights">
+              <li>Dense fog & FOG-PASS rule speed caps (&lt;600m vis → 60/75 km/h cap)</li>
+              <li>Monsoon flood regulations & Konkan Railway monsoon timetable</li>
+              <li>Continuous Welded Rails (CWR) heat-wave buckling patrolling rules</li>
+              <li>Target schema: <code>weather_features.csv</code></li>
+            </ul>
+          </div>
+          <div class="module-footer">
+            <span class="module-artifacts">README.md • weather_features.csv</span>
+            <span>G&SR Rules Encoded</span>
+          </div>
+        </div>
+
+        <!-- Module 06 -->
+        <div class="module-card" data-status="in-progress">
+          <div class="module-top">
+            <div class="module-meta">
+              <span class="module-num">MODULE 06</span>
+              <span class="badge-status badge-in-progress">⚡ SPECIFIED</span>
+            </div>
+            <h4 class="module-title">Network Anomalies & Incidents</h4>
+            <span class="module-folder">Network-Anomalies/</span>
+            <p class="module-desc">Models stochastic disruptions that invalidate nominal timetable predictions, including signaling failures, emergency chain pulls, and outer signal hold-ups.</p>
+            <ul class="module-highlights">
+              <li>S&T track circuit red-signal locking & manual Paper Line Clear (PLCT)</li>
+              <li>Alarm Chain Pulling (ACP) brake pipe pressure drop (15–25 min lost)</li>
+              <li>Cattle Run-Over (CRO) emergency inspection delay (15–40 min lost)</li>
+              <li>Target schema: <code>anomalies.csv</code></li>
+            </ul>
+          </div>
+          <div class="module-footer">
+            <span class="module-artifacts">README.md • anomalies.csv</span>
+            <span>Incident Schemas Ready</span>
+          </div>
+        </div>
+
+        <!-- Module 07 -->
+        <div class="module-card" data-status="in-progress">
+          <div class="module-top">
+            <div class="module-meta">
+              <span class="module-num">MODULE 07</span>
+              <span class="badge-status badge-planned">🧠 ARCHITECTED</span>
+            </div>
+            <h4 class="module-title">Dynamic ETA Prediction Engine</h4>
+            <span class="module-folder">ETA-Prediction-Engine/</span>
+            <p class="module-desc">The algorithmic and machine learning core. Fuses static timetable, real-time kinematics, weather, and historical Markov distributions to forecast arrival time windows.</p>
+            <ul class="module-highlights">
+              <li>Mathematical formulation: Dynamic ETA with intermediate halt buffers</li>
+              <li>LightGBM / XGBoost Regressor + Spatial-Temporal GNN (ST-GNN)</li>
+              <li>Probabilistic arrival intervals: P10 (optimistic), P50, P90 (conservative)</li>
+              <li>FastAPI microservice endpoints (<code>/api/v1/eta</code>)</li>
+            </ul>
+          </div>
+          <div class="module-footer">
+            <span class="module-artifacts">Pipeline Formulation Ready</span>
+            <span>ML Inference Target</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Architecture Visual Flow -->
+    <section class="architecture-section" id="architecture">
+      <div class="section-header">
+        <span class="section-tag">System Topology</span>
+        <h3 class="section-title">End-to-End Prediction Pipeline</h3>
+        <p class="section-subtitle">How raw Indian Railways telemetry is transformed into probabilistic arrival estimates.</p>
+      </div>
+
+      <div class="arch-flow">
+        <!-- Tier 1 -->
+        <div class="arch-tier">
+          <div class="arch-tier-title"><span>01</span> Data Acquisition Layer (Ground Truth & Telemetry)</div>
+          <div class="arch-boxes">
+            <div class="arch-box">
+              <h5>Train Scraper</h5>
+              <p>5,208+ Master Trains & Schedules</p>
+            </div>
+            <div class="arch-box">
+              <h5>Station Scraper</h5>
+              <p>8,990 Nodes & 420K Halt Events</p>
+            </div>
+            <div class="arch-box">
+              <h5>Live Tracker</h5>
+              <p>Instantaneous Delay & Micro-Cabins</p>
+            </div>
+            <div class="arch-box">
+              <h5>Historical Engine</h5>
+              <p>Markov Transitions & Drift Profiles</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-arrow">▼</div>
+
+        <!-- Tier 2 -->
+        <div class="arch-tier">
+          <div class="arch-tier-title"><span>02</span> Feature Fusion & Railway Physical Constraints Engine</div>
+          <div class="arch-boxes">
+            <div class="arch-box">
+              <h5>Kinematic Drift</h5>
+              <p>dΔt/dx Delay Gradient</p>
+            </div>
+            <div class="arch-box">
+              <h5>Timetable Slack</h5>
+              <p>Built-in Recovery Margin (5–15%)</p>
+            </div>
+            <div class="arch-box">
+              <h5>COA Precedence</h5>
+              <p>Priority Tier 1 to 6 Dispatching</p>
+            </div>
+            <div class="arch-box">
+              <h5>Weather & G&SR</h5>
+              <p>FOG-PASS Caps & Monsoon Speed</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-arrow">▼</div>
+
+        <!-- Tier 3 -->
+        <div class="arch-tier">
+          <div class="arch-tier-title"><span>03</span> Machine Learning & Prediction Layer</div>
+          <div class="arch-boxes">
+            <div class="arch-box" style="border-color: #3b82f6;">
+              <h5 style="color: #60a5fa;">Gradient Boosted Trees</h5>
+              <p>LightGBM / XGBoost Regressor</p>
+            </div>
+            <div class="arch-box" style="border-color: #8b5cf6;">
+              <h5 style="color: #c084fc;">Spatial-Temporal GNN</h5>
+              <p>Network Node & Edge Propagation</p>
+            </div>
+            <div class="arch-box" style="border-color: #10b981;">
+              <h5 style="color: #34d399;">Probabilistic Windows</h5>
+              <p>P10, P50 (Expected), P90 Delays</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-arrow">▼</div>
+
+        <!-- Tier 4 -->
+        <div class="arch-tier">
+          <div class="arch-tier-title"><span>04</span> Serving Layer</div>
+          <div class="arch-boxes">
+            <div class="arch-box">
+              <h5>Dynamic ETA REST API</h5>
+              <p>FastAPI Microservice (JSON)</p>
+            </div>
+            <div class="arch-box">
+              <h5>Operations Dashboard</h5>
+              <p>Real-Time Dispatcher & Passenger UI</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operational Reality & Domain Constraints -->
+    <section class="section" id="domain-rules">
+      <div class="section-header">
+        <span class="section-tag">Indian Railways Reality</span>
+        <h3 class="section-title">Domain Logic & Authority Systems</h3>
+        <p class="section-subtitle">Real-world operational rules that dictate actual train movement across Indian Railways.</p>
+      </div>
+
+      <div class="domain-grid">
+        <!-- Card 1 -->
+        <div class="domain-card">
+          <h4>🛰️ CRIS & ISRO Systems</h4>
+          <p>The system bridges operational telemetry feeds used across 68 railway divisions:</p>
+          <ul class="precedence-list" style="list-style: disc inside;">
+            <li><strong>COA (Control Office Application):</strong> Section controller dispatching software plotting live train precedence.</li>
+            <li><strong>RTIS (CRIS + ISRO):</strong> Locomotives carry GPS/GAGAN transponders transmitting real-time position every 30 seconds.</li>
+            <li><strong>NTES:</strong> Public enquiry interface with 2–5 min latency.</li>
+          </ul>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="domain-card">
+          <h4>🚦 Dispatching Precedence Hierarchy</h4>
+          <p>When multiple trains compete for the same block section or platform, Section Controllers strictly prioritize:</p>
+          <ol class="precedence-list">
+            <li><strong>ARME / ART:</strong> Accident Relief & Medical Emergency</li>
+            <li><strong>Vande Bharat, Rajdhani, Shatabdi, Tejas</strong></li>
+            <li><strong>Premium Superfast & Duronto Express</strong></li>
+            <li><strong>Regular Mail & Express Trains</strong></li>
+            <li><strong>Passenger, MEMU, DEMU Locals</strong></li>
+            <li><strong>Freight & Goods Trains (Container → Coal)</strong></li>
+          </ol>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="domain-card">
+          <h4>⚡ Braking & Environmental G&SR</h4>
+          <p>Physics-based constraints governing acceleration and braking:</p>
+          <ul class="precedence-list" style="list-style: disc inside;">
+            <li><strong>LHB vs ICF:</strong> LHB disc brakes stop in ~1,100m at 130 km/h; ICF shoe brakes require ~1,400m at 110 km/h.</li>
+            <li><strong>FOG-PASS Rules:</strong> Visibility &lt;600m forces speed reduction to 60 km/h (or 75 km/h with GPS device).</li>
+            <li><strong>Timetable Slack:</strong> 5%–15% built-in recovery time before major junctions allows late trains to absorb delay.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roadmap & Next Steps -->
+    <section class="section" id="roadmap">
+      <div class="section-header">
+        <span class="section-tag">Execution Plan</span>
+        <h3 class="section-title">Milestones & Next Steps</h3>
+        <p class="section-subtitle">Progress accomplished and upcoming development targets for SIH presentation.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot done"></div>
+          <div class="timeline-content">
+            <h4>Phase 1: Master Timetable & Station Topology Acquisition (Completed)</h4>
+            <p>Indexed 5,208+ master trains, 8,990 geocoded network nodes, 420,345 halt records in SQLite and high-performance CSVs.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot done"></div>
+          <div class="timeline-content">
+            <h4>Phase 2: Live Telemetry & Autonomous Delay Scraping (Completed)</h4>
+            <p>Live kinematic tracking with micro-cabin detection; Autonomous Beacon Supervisor achieved <code>GOAL_COMPLETE</code> across 6,930 crawling horizons.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot next"></div>
+          <div class="timeline-content">
+            <h4>Phase 3: Weather Feed & Network Anomaly Pipelines (Current Sprint)</h4>
+            <p>Connect weather API for winter fog (NR/NCR) and monsoon restrictions; build anomaly parser for S&T failures and ACP events.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>Phase 4: LightGBM & Spatial-Temporal GNN Model Training</h4>
+            <p>Train probabilistic regression models predicting P10, P50, and P90 ETA arrival windows on historical delay matrices.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>Phase 5: Interactive Web Dashboard & Real-Time REST API</h4>
+            <p>Expose FastAPI endpoints (<code>/api/v1/eta</code>) and interactive map visualization showing live trains, delay trends, and predicted arrival times.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <strong>SIH-DETA</strong> — Indian Railways Dynamic ETA Prediction System<br>
+      Smart India Hackathon • Built with Python, SQLite, and Physics-Informed ML • Clean Architecture with Zero-Dependency Fallbacks
+    </p>
+  </footer>
+
+  <script>
+    function filterModules(filter) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const cards = document.querySelectorAll('.module-card');
+      cards.forEach(card => {
+        const status = card.getAttribute('data-status');
+        if (filter === 'all' || status === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+{
+  "success": true,
+  "data": {
+    "trainInfo": {
+      "train_no": "12301",
+      "train_name": "RAJDHANI EXPRES",
+      "from_stn_name": "Howrah Jn",
+      "from_stn_code": "HWH",
+      "to_stn_name": "New Delhi",
+      "to_stn_code": "NDLS",
+      "from_time": "16:50",
+      "to_time": "10:05",
+      "travel_time": "17:15 hrs",
+      "running_days": "1111110",
+      "type": "RAJDHANI",
+      "train_id": "1818"
+    },
+    "route": [
+      {
+        "stnCode": "HWH",
+        "stnName": "Howrah Jn",
+        "arrival": "--",
+        "departure": "16:50",
+        "halt": "0 min",
+        "haltMinutes": 0,
+        "distance": "0",
+        "day": "1",
+        "platform": 9,
+        "coordinates": {
+          "latitude": 22.5835032884945,
+          "longitude": 88.3422660827637
+        }
+      },
+      {
+        "stnCode": "ASN",
+        "stnName": "Asansol Jn",
+        "arrival": "18:47",
+        "departure": "18:49",
+        "halt": "2 min",
+        "haltMinutes": 2,
+        "distance": "200",
+        "day": "1",
+        "platform": 4,
+        "coordinates": {
+          "latitude": 23.6909736827628,
+          "longitude": 86.9759488105774
+        }
+      },
+      {
+        "stnCode": "DHN",
+        "stnName": "Dhanbad Jn",
+        "arrival": "19:55",
+        "departure": "20:00",
+        "halt": "5 min",
+        "haltMinutes": 5,
+        "distance": "259",
+        "day": "1",
+        "platform": 3,
+        "coordinates": {
+          "latitude": 23.7909995971414,
+          "longitude": 86.4299248158932
+        }
+      },
+      {
+        "stnCode": "PNME",
+        "stnName": "Parasnath",
+        "arrival": "20:30",
+        "departure": "20:32",
+        "halt": "2 min",
+        "haltMinutes": 2,
+        "distance": "306",
+        "day": "1",
+        "platform": 3,
+        "coordinates": {
+          "latitude": 23.9874729836716,
+          "longitude": 86.0374224185944
+        }
+      },
+      {
+        "stnCode": "GAYA",
+        "stnName": "Gaya Jn",
+        "arrival": "22:32",
+        "departure": "22:35",
+        "halt": "3 min",
+        "haltMinutes": 3,
+        "distance": "458",
+        "day": "1",
+        "platform": 1,
+        "coordinates": {
+          "latitude": 24.8032386151848,
+          "longitude": 84.9993163347244
+        }
+      },
+      {
+        "stnCode": "DDU",
+        "stnName": "Dd Upadhyaya Jn",
+        "arrival": "00:43",
+        "departure": "00:50",
+        "halt": "7 min",
+        "haltMinutes": 7,
+        "distance": "661",
+        "day": "2",
+        "platform": 7,
+        "coordinates": {
+          "latitude": 25.2782289490803,
+          "longitude": 83.1198334693909
+        }
+      },
+      {
+        "stnCode": "PRYJ",
+        "stnName": "Prayagraj Jn",
+        "arrival": "02:43",
+        "departure": "02:45",
+        "halt": "2 min",
+        "haltMinutes": 2,
+        "distance": "813",
+        "day": "2",
+        "platform": 1,
+        "coordinates": {
+          "latitude": 25.4456046157419,
+          "longitude": 81.8251365423203
+        }
+      },
+      {
+        "stnCode": "CNB",
+        "stnName": "Kanpur Central",
+        "arrival": "04:45",
+        "departure": "04:50",
+        "halt": "5 min",
+        "haltMinutes": 5,
+        "distance": "1008",
+        "day": "2",
+        "platform": 1,
+        "coordinates": {
+          "latitude": 26.4540336401929,
+          "longitude": 80.3510373830795
+        }
+      },
+      {
+        "stnCode": "NDLS",
+        "stnName": "New Delhi",
+        "arrival": "10:05",
+        "departure": "--",
+        "halt": "0 min",
+        "haltMinutes": 0,
+        "distance": "1449",
+        "day": "2",
+        "platform": 14,
+        "coordinates": {
+          "latitude": 28.6429164488347,
+          "longitude": 77.2196066379548
+        }
+      }
+    ]
+  }
+}

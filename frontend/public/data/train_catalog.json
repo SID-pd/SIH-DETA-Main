@@ -1,0 +1,102 @@
+[
+  {
+    "train_number": "12919",
+    "train_name": "Malwa Express",
+    "type": "SUPERFAST",
+    "from": "Dr. Ambedkar Nagar (DADN)",
+    "to": "Shri Mata Vaishno Devi Katra (SVDK)",
+    "distance_km": 1640.3,
+    "halts": 50,
+    "track_points": 207
+  },
+  {
+    "train_number": "12002",
+    "train_name": "New Delhi - Rani Kamlapati Shatabdi Express",
+    "type": "Shatabdi Express",
+    "from": "New Delhi (NDLS)",
+    "to": "Rani Kamalapati (RKMP)",
+    "distance_km": 708.3,
+    "halts": 11,
+    "track_points": 87
+  },
+  {
+    "train_number": "12951",
+    "train_name": "Mumbai Central - New Delhi Tejas Rajdhani Express",
+    "type": "Rajdhani Express",
+    "from": "Mumbai Central (MMCT)",
+    "to": "New Delhi (NDLS)",
+    "distance_km": 1385.6,
+    "halts": 8,
+    "track_points": 202
+  },
+  {
+    "train_number": "12952",
+    "train_name": "New Delhi - Mumbai Central Tejas Rajdhani Express",
+    "type": "Rajdhani Express",
+    "from": "New Delhi (NDLS)",
+    "to": "Mumbai Central (MMCT)",
+    "distance_km": 1385.5,
+    "halts": 8,
+    "track_points": 202
+  },
+  {
+    "train_number": "12301",
+    "train_name": "Howrah - New Delhi Rajdhani Express",
+    "type": "Rajdhani Express",
+    "from": "Howrah (HWH)",
+    "to": "New Delhi (NDLS)",
+    "distance_km": 1456.2,
+    "halts": 9,
+    "track_points": 218
+  },
+  {
+    "train_number": "11019",
+    "train_name": "KONARK EXPRESS",
+    "type": "EXPRESS",
+    "from": "C Shivaji Term Mumbai (CSMT)",
+    "to": "Bhubaneswar (BBS)",
+    "distance_km": 1930.0,
+    "halts": 41,
+    "track_points": 300
+  },
+  {
+    "train_number": "11020",
+    "train_name": "KONARK EXPRESS",
+    "type": "EXPRESS",
+    "from": "Bhubaneswar (BBS)",
+    "to": "C Shivaji Term Mumbai (CSMT)",
+    "distance_km": 1930.0,
+    "halts": 42,
+    "track_points": 300
+  },
+  {
+    "train_number": "14526",
+    "train_name": "UMB INTERCITY",
+    "type": "EXPRESS",
+    "from": "Shri Ganganagar (SGNR)",
+    "to": "Ambala Cant Jn (UMB)",
+    "distance_km": 328.0,
+    "halts": 15,
+    "track_points": 43
+  },
+  {
+    "train_number": "12723",
+    "train_name": "TELANGANA  EXP",
+    "type": "SUPERFAST",
+    "from": "Hyderabad Decan (HYB)",
+    "to": "New Delhi (NDLS)",
+    "distance_km": 1683.0,
+    "halts": 18,
+    "track_points": 197
+  },
+  {
+    "train_number": "09022",
+    "train_name": "JAMMU TAWI - BANDRA TERMINUS AC Suvidha Special (Starts 5 April)",
+    "type": "SF",
+    "from": "Jammu Tawi (JAT)",
+    "to": "Mumbai Bandra Terminus (BDTS)",
+    "distance_km": 1957,
+    "halts": 2,
+    "track_points": 314
+  }
+]

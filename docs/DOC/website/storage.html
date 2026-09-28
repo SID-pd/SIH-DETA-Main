@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiered Storage Architecture | RailPulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Sticky Navigation Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="4" y="3" width="16" height="16" rx="2"/>
+            <path d="M4 11h16M12 3v8M8 19l-2 3M16 19l2 3M9 15h.01M15 15h.01"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-title">RailPulse <span class="brand-tag">Storage</span></span>
+          <span class="brand-subtitle">High-Throughput Tiered Storage Architecture</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Overview & Architecture</a>
+        <a href="layer1.html">Layer 1: Behaviour</a>
+        <a href="layer2.html">Layer 2: Safety & Collision</a>
+        <a href="layer3.html">Layer 3: Dynamic ML</a>
+        <a href="traversal.html">Dual-Mode Traversal</a>
+        <a href="storage.html" class="active">Storage Paradigm</a>
+      </nav>
+
+      <span class="badge-sih">In-Memory Scalability</span>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- PAGE HERO -->
+    <section class="hero-methodology">
+      <span class="hero-pill">Tiered Data Architecture</span>
+      <h1 class="hero-heading">High-Throughput Storage Paradigm: Master Database vs. Redis In-Memory Tier</h1>
+      <p class="hero-lead">
+        When an express train is delayed by fog, tens of thousands of anxious passengers simultaneously refresh passenger apps (IRCTC, NTES). <strong>If these queries hit a relational disk database, connection pools collapse</strong>. RailPulse strictly decouples heavy spatial compute and transactional persistence from high-concurrency public reads.
+      </p>
+
+      <div class="principles-grid">
+        <div class="principle-box">
+          <span class="principle-num">The Challenge</span>
+          <h3 class="principle-title">100,000+ Queries / Second</h3>
+          <p class="principle-desc">
+            Public queries during major travel disruptions spike exponentially. Relational disk databases suffer severe I/O bottlenecks under concurrent read spikes.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <span class="principle-num">The Solution</span>
+          <h3 class="principle-title">Sub-1.5ms In-Memory Serving</h3>
+          <p class="principle-desc">
+            Verified ETAs, station arrival boards, and coordinate states are stored in Redis RAM clusters, serving client apps in under 1.5ms without touching disk.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <span class="principle-num">The Boundary</span>
+          <h3 class="principle-title">Strict Database Isolation</h3>
+          <p class="principle-desc">
+            The PostgreSQL + PostGIS master database operates in a private, shielded network accessed strictly by compute engines, guaranteeing zero lockups.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISUAL DIAGRAM: PUBLIC ISOLATION & TIERED ARCHITECTURE -->
+    <section class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Visual Tier Architecture</span>
+        <h2 class="section-title">How Data Moves: From Private Persistence to Public Reads</h2>
+        <p class="section-subtitle">
+          Visualizing the separation between compute persistence and the high-speed in-memory public serving layer.
+        </p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="pipeline-svg-box">
+          <svg viewBox="0 0 940 380" class="pipeline-svg-element">
+            <!-- TIER 1: Master DB (Bottom Left) -->
+            <g transform="translate(60, 60)">
+              <!-- 3D Cylinder -->
+              <path d="M 0 35 L 0 110 C 0 130, 200 130, 200 110 L 200 35 Z" fill="#e0f2fe" stroke="#1e293b" stroke-width="2"/>
+              <path d="M 0 110 C 0 130, 200 130, 200 110" fill="none" stroke="#1e293b" stroke-width="2"/>
+              <ellipse cx="100" cy="35" rx="100" ry="20" fill="#bae6fd" stroke="#1e293b" stroke-width="2"/>
+              <text x="100" y="70" class="svg-text-primary" style="font-size: 14px; font-weight: 800;">Master PostgreSQL</text>
+              <text x="100" y="90" class="svg-text-secondary" style="font-size: 11px;">+ PostGIS Spatial Graph</text>
+              <text x="100" y="108" style="font-family: var(--font-sans); font-size: 10px; font-weight: 700; fill: #1e293b; text-anchor: middle;">Private Network Only</text>
+            </g>
+
+            <!-- Arrow from Master DB to Compute Engines -->
+            <path d="M 265 110 L 370 110" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-solid)"/>
+            <text x="318" y="100" style="font-family: var(--font-sans); font-size: 10px; font-weight: 700; fill: #475569; text-anchor: middle;">Graph & Topology</text>
+
+            <!-- TIER 2: Compute Engines (Center) -->
+            <g transform="translate(370, 40)">
+              <rect width="200" height="140" rx="14" fill="#ffedd5" stroke="#1e293b" stroke-width="2"/>
+              <text x="100" y="35" class="svg-text-primary" style="font-size: 13.5px; font-weight: 800;">3-Layer Engine</text>
+              <text x="100" y="58" class="svg-text-secondary" style="font-size: 11px;">• Layer 1 Behaviour DNA</text>
+              <text x="100" y="78" class="svg-text-secondary" style="font-size: 11px;">• Layer 3 ML Inference</text>
+              <text x="100" y="98" class="svg-text-secondary" style="font-size: 11px;">• Layer 2 Safety Verifier</text>
+              <text x="100" y="125" style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; fill: #ea580c; text-anchor: middle;">Verified ETA Emitted</text>
+            </g>
+
+            <!-- Arrow from Compute Engine to Redis Tier -->
+            <path d="M 570 110 L 675 110" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-solid)"/>
+            <text x="622" y="100" style="font-family: var(--font-sans); font-size: 10px; font-weight: 700; fill: #166534; text-anchor: middle;">Sync in &lt;1.5ms</text>
+
+            <!-- TIER 3: Redis In-Memory Cache (Right) -->
+            <g transform="translate(680, 60)">
+              <path d="M 0 35 L 0 110 C 0 130, 200 130, 200 110 L 200 35 Z" fill="#fef9c3" stroke="#1e293b" stroke-width="2"/>
+              <path d="M 0 110 C 0 130, 200 130, 200 110" fill="none" stroke="#1e293b" stroke-width="2"/>
+              <ellipse cx="100" cy="35" rx="100" ry="20" fill="#fef08a" stroke="#1e293b" stroke-width="2"/>
+              <text x="100" y="70" class="svg-text-primary" style="font-size: 14px; font-weight: 800;">Redis In-Memory</text>
+              <text x="100" y="90" class="svg-text-secondary" style="font-size: 11px;">RAM Serving Cluster</text>
+              <text x="100" y="108" style="font-family: var(--font-sans); font-size: 10px; font-weight: 700; fill: #854d0e; text-anchor: middle;">100k+ Queries / Sec</text>
+            </g>
+
+            <!-- Vertical Arrow Down from Redis to Public Endpoints -->
+            <path d="M 780 190 L 780 260" stroke="#1e293b" stroke-width="3" marker-end="url(#arrow-solid)"/>
+            <text x="840" y="225" style="font-family: var(--font-sans); font-size: 11px; font-weight: 700; fill: #0284c7;">Public Read Stream</text>
+
+            <!-- Public Clients Box at Bottom -->
+            <g transform="translate(200, 260)">
+              <rect width="680" height="75" rx="12" fill="#dcfce7" stroke="#1e293b" stroke-width="2"/>
+              <text x="340" y="32" class="svg-text-primary" style="font-size: 14px; font-weight: 800;">Public Endpoints & Passenger Interfaces</text>
+              <text x="340" y="55" class="svg-text-secondary" style="font-size: 12px;">
+                IRCTC Mobile Apps • NTES Public Web • Platform PIDS Screens • Station Displays
+              </text>
+            </g>
+
+            <!-- Security Wall Indicator -->
+            <line x1="285" y1="20" x2="285" y2="240" stroke="#f43f5e" stroke-width="2" stroke-dasharray="6,4"/>
+            <text x="270" y="180" transform="rotate(-90 270,180)" style="font-family: var(--font-mono); font-size: 10px; font-weight: 800; fill: #be123c;">
+              FIREWALL: ZERO DIRECT PUBLIC ACCESS TO POSTGRESQL
+            </text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISUAL MATRIX COMPARISON -->
+    <section class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Architectural Matrix</span>
+        <h2 class="section-title">Comparative Analysis: Database Tier Responsibilities</h2>
+      </div>
+
+      <div class="storage-comparison-grid">
+        <!-- PostgreSQL Side -->
+        <div class="storage-card storage-pg">
+          <div class="storage-header">
+            <span class="storage-icon">💾</span>
+            <div>
+              <h3>Master Database (PostgreSQL + PostGIS)</h3>
+              <span class="storage-badge">Persistent Foundation</span>
+            </div>
+          </div>
+          <div class="storage-visual-box">
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Primary Role</span>
+              <span class="storage-visual-val">Authoritative Source of Truth & Spatial Graph</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Data Types</span>
+              <span class="storage-visual-val">Track geometries, master timetables, crew logs</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Access Boundary</span>
+              <span class="storage-visual-val">Strictly Private Network (Zero Public Traffic)</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Update Frequency</span>
+              <span class="storage-visual-val">Batch updates upon timetable/infrastructure changes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Redis Side -->
+        <div class="storage-card storage-redis">
+          <div class="storage-header">
+            <span class="storage-icon">⚡</span>
+            <div>
+              <h3>In-Memory Serving Tier (Redis)</h3>
+              <span class="storage-badge">High-Speed Frontline</span>
+            </div>
+          </div>
+          <div class="storage-visual-box">
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Primary Role</span>
+              <span class="storage-visual-val">Ultra-Low Latency Public Query Serving</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Data Types</span>
+              <span class="storage-visual-val">Latest ETAs, live coordinates, platform arrival boards</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Throughput Capacity</span>
+              <span class="storage-visual-val">100,000+ req/sec (&lt; 1.5ms latency)</span>
+            </div>
+            <div class="storage-visual-item">
+              <span class="storage-visual-label">Update Frequency</span>
+              <span class="storage-visual-val">Real-time Pub/Sub push as trains cross block sections</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div><strong>RailPulse</strong> — Smart India Hackathon Operational Intelligence</div>
+      <div>Storage Architecture: PostgreSQL Master Truth • Redis In-Memory Serving • Strict Public Isolation</div>
+    </div>
+  </footer>
+
+</body>
+</html>

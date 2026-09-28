@@ -1,0 +1,91 @@
+# Dynamic ETA Pipeline — SIH26028
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'background':'#101827','primaryColor':'#131c2e','primaryTextColor':'#e7ecf5','primaryBorderColor':'#42536e','lineColor':'#5b6b85','clusterBkg':'#0d1420','clusterBorder':'#263248','edgeLabelBackground':'#101827','fontFamily':'IBM Plex Mono, monospace','fontSize':'13px'}}}%%
+flowchart LR
+  subgraph SRC[" live + static sources "]
+    direction TB
+    NTES["NTES<br/>live position + eta"]
+    ETRAIN["ETrain.info<br/>backup scrape"]
+    WEATHER["IMD / OpenWeather<br/>monsoon + fog"]
+    GEOJSON["datameet/railways<br/>stations . routes . schedule"]
+  end
+
+  subgraph ING[" ingestion "]
+    direction TB
+    POLLER["ntes_poller.py"]
+    SCRAPER["etrain_scraper.py"]
+    WLOAD["weather_ingest.py"]
+    GLOAD["load_static_graph.py"]
+  end
+
+  subgraph STORE[" storage "]
+    direction TB
+    PG[("postgres<br/>live_events . stations . routes . schedules . weather")]
+    REDIS[("redis<br/>latest position cache")]
+  end
+
+  subgraph ML[" ml layer -- offline "]
+    direction TB
+    FEAT["features.py<br/>time . geo . route . weather . rolling-stock . ops"]
+    MODEL["lightgbm regressor<br/>predicted incremental delay"]
+  end
+
+  subgraph API[" serving api -- fastapi "]
+    direction TB
+    ETA["eta_engine.py<br/>walks remaining stops,<br/>propagates delay"]
+    RAG["rag_assistant.py<br/>retrieval + llm"]
+    VDB[("faiss / chroma<br/>historical delay causes")]
+  end
+
+  subgraph CLIENT[" dashboard -- react "]
+    direction TB
+    MAP["live map + eta countdowns"]
+    CHAT["Why is this train late?"]
+  end
+
+  NTES --> POLLER
+  ETRAIN --> SCRAPER
+  WEATHER --> WLOAD
+  GEOJSON -.->|one-time| GLOAD
+
+  POLLER -->|every 10-15 min| PG
+  POLLER --> REDIS
+  SCRAPER --> PG
+  WLOAD --> PG
+  GLOAD --> PG
+
+  PG -->|nightly retrain| FEAT
+  FEAT --> MODEL
+  MODEL -->|delay prediction| ETA
+  PG -->|route + schedule| ETA
+  REDIS -->|current position| ETA
+  ETA -->|on each update| MAP
+
+  PG -->|historical causes| VDB
+  CHAT -->|question| RAG
+  VDB -->|retrieved context| RAG
+  REDIS -->|live features| RAG
+  RAG -->|answer| CHAT
+
+  classDef live fill:#241b0c,stroke:#eab04a,color:#f6e2b8,stroke-width:1.5px;
+  classDef staticData fill:#0d2419,stroke:#4fbf8b,color:#cdeee0,stroke-width:1.5px;
+  classDef store fill:#101827,stroke:#5b6b85,color:#e7ecf5,stroke-width:1.5px;
+  classDef compute fill:#101827,stroke:#7c8aa6,color:#e7ecf5,stroke-width:1.5px;
+  classDef diff fill:#2a1310,stroke:#e2584a,color:#f6cfc9,stroke-width:1.5px;
+  classDef client fill:#0e1c30,stroke:#6f9ceb,color:#dbe6f9,stroke-width:1.5px;
+
+  class NTES,ETRAIN,WEATHER,POLLER,SCRAPER,WLOAD live;
+  class GEOJSON,GLOAD staticData;
+  class PG,REDIS,VDB store;
+  class FEAT,MODEL,ETA compute;
+  class RAG,CHAT diff;
+  class MAP client;
+
+  style SRC fill:#0d1420,stroke:#263248,color:#8b98b0;
+  style ING fill:#0d1420,stroke:#263248,color:#8b98b0;
+  style STORE fill:#0d1420,stroke:#263248,color:#8b98b0;
+  style ML fill:#0d1420,stroke:#263248,color:#8b98b0;
+  style API fill:#0d1420,stroke:#263248,color:#8b98b0;
+  style CLIENT fill:#0d1420,stroke:#263248,color:#8b98b0;
+```

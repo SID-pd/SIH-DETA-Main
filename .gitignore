@@ -1,0 +1,60 @@
+# Node & Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+
+# Python & Virtual Environments
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.pytest_cache/
+
+# Unpushed Large Assets Folder (Ignore binaries, keep the Markdown manifest!)
+unpushed_assets/*
+!unpushed_assets/UNPUSHED_FILES_MANIFEST.md
+!unpushed_assets/README.md
+
+# Large SQLite Databases (>10MB) & WAL files
+*.db-shm
+*.db-wal
+*.sqlite-shm
+*.sqlite-wal
+backend/data/darpan.sqlite
+backend/scraper/scrape_state.sqlite
+backend/predictor/data/live_snapshots.sqlite
+backend/sih_deta/Historical-Delay-Records/data/historical.db
+backend/sih_deta/Historical-Delay-Records/data/checkpoint.json
+backend/sih_deta/Historical-Delay-Records/data/skipped_*.json
+backend/sih_deta/Weather-Environment/data/weather.db
+backend/sih_deta/Weather-Environment/data/*checkpoint*.json
+backend/sih_deta/Station-Halt Scraper/data/stations.db
+backend/sih_deta/Network-Anomalies/data/anomalies.db
+
+# Raw Scrape Caches, Logs & Heavy Exports
+**/data/cache/
+**/data/exports/*.csv
+**/data/exports/*.json
+backend/scraper/output/
+*.csv
+**/logs/
+*.log
+*.parquet
+backend/predictor/data/*.csv
+backend/ml/registry/eta_model.joblib
+
+# Keep Small Essential Models & Micro-DBs Tracked (< 2MB)
+!backend/ml/registry/eta_model_subset.joblib
+!backend/ml/registry/risk_clf_subset_card.json
+!backend/predictor/artifacts/station_eta_model.joblib
+!backend/sih_deta/Train-Scraper/data/trains.db
+!backend/sih_deta/Live-Journey-Tracker/data/telemetry.db
+
+# Environment & OS
+.env
+.DS_Store
+Thumbs.db

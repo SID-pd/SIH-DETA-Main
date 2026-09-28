@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layer 2: Collision Detection & Safety Verification | RailPulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Sticky Navigation Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="4" y="3" width="16" height="16" rx="2"/>
+            <path d="M4 11h16M12 3v8M8 19l-2 3M16 19l2 3M9 15h.01M15 15h.01"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-title">RailPulse <span class="brand-tag">Layer 2</span></span>
+          <span class="brand-subtitle">Collision Detection & Operational Constraints</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Overview & Architecture</a>
+        <a href="layer1.html">Layer 1: Behaviour</a>
+        <a href="layer2.html" class="active">Layer 2: Safety & Collision</a>
+        <a href="layer3.html">Layer 3: Dynamic ML</a>
+        <a href="traversal.html">Dual-Mode Traversal</a>
+        <a href="storage.html">Storage Paradigm</a>
+      </nav>
+
+      <span class="badge-sih">Railway Physics & Rulebook</span>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- PAGE HERO -->
+    <section class="hero-methodology">
+      <span class="hero-pill">Computational Layer 02</span>
+      <h1 class="hero-heading">Layer 2: Operational Constraint & Collision Detection Engine</h1>
+      <p class="hero-lead">
+        Machine learning models are purely probabilistic—they can easily predict an arrival time that violates track separation rules or requires two trains to occupy the same section simultaneously. <strong>Layer 2 is the deterministic railway safety engine</strong> that enforces minimum headways, detects track occupancy conflicts, and generates precedence resolutions before any ETA is accepted.
+      </p>
+
+      <div class="principles-grid">
+        <div class="principle-box">
+          <span class="principle-num">Safety Rule 01</span>
+          <h3 class="principle-title">Headway Separation Enforcement</h3>
+          <p class="principle-desc">
+            Enforces strict time and distance separation between consecutive rakes based on signalling block length, line speed, and emergency braking deceleration curves.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <span class="principle-num">Safety Rule 02</span>
+          <h3 class="principle-title">Opposing & Interlocking Conflict</h3>
+          <p class="principle-desc">
+            Detects convergent track conflicts at crossover junctions, calculating optimal holding patterns on loop lines to prevent gridlocks without causing domino delays.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <span class="principle-num">Safety Rule 03</span>
+          <h3 class="principle-title">Platform & Turnaround Feasibility</h3>
+          <p class="principle-desc">
+            Guarantees that predicted arrivals do not clash with occupied platform tracks, ensuring adequate time buffers for pit-line cleaning and rake maintenance crews.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISUAL DIAGRAM: REAR-END COLLISION & HEADWAY ENFORCEMENT -->
+    <section class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Collision Prevention Architecture</span>
+        <h2 class="section-title">Headway Separation & Block Occupancy Verification</h2>
+        <p class="section-subtitle">
+          How Layer 2 evaluates consecutive trains running on the same track to prevent headway violations and rear-end conflicts.
+        </p>
+      </div>
+
+      <!-- Spacious Visual Block Section Graphic -->
+      <div class="diagram-container">
+        <div class="pipeline-svg-box">
+          <svg viewBox="0 0 940 280" class="pipeline-svg-element">
+            <!-- Track Line -->
+            <path d="M 40 140 L 900 140" stroke="#cbd5e1" stroke-width="8" stroke-linecap="round"/>
+
+            <!-- Block Section Boundaries -->
+            <line x1="280" y1="110" x2="280" y2="170" stroke="#1e293b" stroke-width="3" stroke-dasharray="4,4"/>
+            <line x1="600" y1="110" x2="600" y2="170" stroke="#1e293b" stroke-width="3" stroke-dasharray="4,4"/>
+
+            <text x="160" y="70" class="svg-text-primary" style="font-size: 13px;">Block Section A (Occupied)</text>
+            <text x="440" y="70" class="svg-text-primary" style="font-size: 13px;">Block Section B (Buffer Separation)</text>
+            <text x="750" y="70" class="svg-text-primary" style="font-size: 13px;">Block Section C (Approaching)</text>
+
+            <!-- Train 1: Lead Train (Howrah Rajdhani) -->
+            <g transform="translate(160, 140)">
+              <rect x="-35" y="-18" width="70" height="36" rx="8" fill="#f59e0b" stroke="#1e293b" stroke-width="2"/>
+              <text x="0" y="5" style="font-family: var(--font-sans); font-size: 11px; font-weight: 800; fill: #ffffff; text-anchor: middle;">Train 12301</text>
+              <text x="0" y="-26" style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; fill: #1e293b; text-anchor: middle;">Speed: 88 km/h</text>
+            </g>
+
+            <!-- Automatic Signal 1: Red (Direct Behind) -->
+            <g transform="translate(280, 110)">
+              <circle r="10" fill="#f43f5e" stroke="#1e293b" stroke-width="2"/>
+              <text y="-16" style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; fill: #be123c; text-anchor: middle;">RED ASPECT</text>
+            </g>
+
+            <!-- Automatic Signal 2: Double Yellow (Caution) -->
+            <g transform="translate(600, 110)">
+              <circle r="10" fill="#f59e0b" stroke="#1e293b" stroke-width="2"/>
+              <text y="-16" style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; fill: #d97706; text-anchor: middle;">CAUTION ASPECT</text>
+            </g>
+
+            <!-- Train 2: Trailing Express Train -->
+            <g transform="translate(750, 140)">
+              <rect x="-35" y="-18" width="70" height="36" rx="8" fill="#3b82f6" stroke="#1e293b" stroke-width="2"/>
+              <text x="0" y="5" style="font-family: var(--font-sans); font-size: 11px; font-weight: 800; fill: #ffffff; text-anchor: middle;">Train 12556</text>
+              <text x="0" y="-26" style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; fill: #1e293b; text-anchor: middle;">Speed: 65 km/h</text>
+            </g>
+
+            <!-- Safe Headway Dimension Line -->
+            <path d="M 195 210 L 715 210" stroke="#10b981" stroke-width="2.5" marker-start="url(#arrow-bi-l)" marker-end="url(#arrow-bi-r)"/>
+            <text x="455" y="200" style="font-family: var(--font-mono); font-size: 12px; font-weight: 800; fill: #166534; text-anchor: middle;">
+              Enforced Minimum Headway: Δt ≥ 3.5 minutes (Safe Separation Maintained)
+            </text>
+            <text x="455" y="240" style="font-family: var(--font-sans); font-size: 11px; font-weight: 600; fill: #475569; text-anchor: middle;">
+              If ML model predicts Train 12556 arriving within 1.5 min of Train 12301, Layer 2 rejects the ETA and adjusts for braking slowdown.
+            </text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISUAL DIAGRAM: CROSSOVER CONFLICT & LOOP LINE OVERTAKE SOLVER -->
+    <section class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Precedence & Interlocking Logic</span>
+        <h2 class="section-title">Convergent Conflict & Loop Line Overtake Solver</h2>
+        <p class="section-subtitle">
+          What happens when a fast passenger train catches up with a slower freight rake, or when two trains converge on a single track.
+        </p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="pipeline-svg-box">
+          <svg viewBox="0 0 940 320" class="pipeline-svg-element">
+            <!-- Main Line Track -->
+            <path d="M 40 120 L 900 120" stroke="#1e293b" stroke-width="4" fill="none"/>
+            <text x="90" y="105" style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; fill: #475569;">MAIN LINE 1 (MPS 130 km/h)</text>
+
+            <!-- Loop Line Track (Diverging and Rejoining) -->
+            <path d="M 280 120 L 360 210 L 640 210 L 720 120" stroke="#64748b" stroke-width="3" stroke-dasharray="6,4" fill="none"/>
+            <text x="500" y="235" style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; fill: #475569; text-anchor: middle;">LOOP LINE 2 (HOLDING SIDING • 30 km/h)</text>
+
+            <!-- Held Freight Rake in Loop Line -->
+            <g transform="translate(500, 210)">
+              <rect x="-45" y="-14" width="90" height="28" rx="6" fill="#fef9c3" stroke="#1e293b" stroke-width="2"/>
+              <text x="0" y="4" style="font-family: var(--font-sans); font-size: 10.5px; font-weight: 800; fill: #854d0e; text-anchor: middle;">Goods 3012 (Held)</text>
+            </g>
+
+            <!-- Fast Rajdhani Express Passing on Main Line -->
+            <g transform="translate(480, 120)">
+              <rect x="-40" y="-16" width="80" height="32" rx="6" fill="#dcfce7" stroke="#1e293b" stroke-width="2"/>
+              <text x="0" y="4" style="font-family: var(--font-sans); font-size: 11px; font-weight: 800; fill: #166534; text-anchor: middle;">Rajdhani 12301</text>
+              <text x="0" y="-24" style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; fill: #16a34a; text-anchor: middle;">Clear Green • Non-Stop (110 km/h)</text>
+            </g>
+
+            <!-- Turnout Crossover Points -->
+            <circle cx="280" cy="120" r="6" fill="#ea580c"/>
+            <circle cx="720" cy="120" r="6" fill="#ea580c"/>
+            <text x="280" y="145" style="font-family: var(--font-sans); font-size: 10px; font-weight: 700; fill: #c2410c; text-anchor: middle;">Turnout A</text>
+            <text x="720" y="145" style="font-family: var(--font-sans); font-size: 10px; font-weight: 700; fill: #c2410c; text-anchor: middle;">Turnout B</text>
+
+            <text x="470" y="280" class="svg-text-primary" style="font-size: 13.5px;">
+              Layer 2 Precedence Verdict: Slower goods rake held on loop siding for 6 minutes, preventing 22-minute delay to premium coaching rake.
+            </text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 DETAILED CONFLICT DETECTION TYPES (VISUAL CARDS) -->
+    <section class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Core Algorithms</span>
+        <h2 class="section-title">The Three Pillars of Collision & Conflict Prevention</h2>
+      </div>
+
+      <div class="deep-dive-grid">
+        <!-- Conflict 1: Headway Infringement -->
+        <div class="feature-visual-card pastel-yellow">
+          <div class="feature-card-header">
+            <h3>1. Headway Infringement</h3>
+            <span class="breakdown-badge">Rear-End Safe</span>
+          </div>
+          <p class="principle-desc">
+            Continuously calculates the instantaneous deceleration distance $D_{\text{stop}} = v^2 / (2 \mu g)$. If the distance between two trains falls below the emergency braking threshold, Layer 2 imposes a speed clamp on the trailing rake.
+          </p>
+          <ul class="feature-bullet-list">
+            <li>Considers wet rail track adhesion (drops from 0.38 to 0.22 during monsoons).</li>
+            <li>Enforces minimum 3.5-minute separation at all station entry home signals.</li>
+          </ul>
+        </div>
+
+        <!-- Conflict 2: Platform Allocation Deadlock -->
+        <div class="feature-visual-card pastel-orange">
+          <div class="feature-card-header">
+            <h3>2. Platform Track Deadlock</h3>
+            <span class="breakdown-badge">Station Capacity</span>
+          </div>
+          <p class="principle-desc">
+            When two incoming trains are predicted to arrive at the same platform within 5 minutes of each other, Layer 2 checks alternative platform availability, line switches, and pit-line turnaround buffers.
+          </p>
+          <ul class="feature-bullet-list">
+            <li>Automatically diverts second rake to vacant loop platform (e.g. Platform 4).</li>
+            <li>Alerts station superintendent 30 minutes in advance for passenger guidance.</li>
+          </ul>
+        </div>
+
+        <!-- Conflict 3: Junction Crossover Lockout -->
+        <div class="feature-visual-card pastel-pink">
+          <div class="feature-card-header">
+            <h3>3. Converging Junction Lockout</h3>
+            <span class="breakdown-badge">Gridlock Safe</span>
+          </div>
+          <p class="principle-desc">
+            At high-density diamond crossings, two train paths intersecting at grade can cause complete gridlock. Layer 2 evaluates train priority rankings (Rajdhani &gt; Superfast &gt; Passenger &gt; Freight).
+          </p>
+          <ul class="feature-bullet-list">
+            <li>Calculates lowest network-wide delay consequence before setting signals.</li>
+            <li>Prevents holding high-speed passenger rakes behind slow-accelerating goods trains.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALTERNATIVE OPTIMIZATION FLOWCHART -->
+    <section class="method-card">
+      <div class="section-header">
+        <span class="section-badge">Optimization Engine</span>
+        <h2 class="section-title">How Layer 2 Solves Infeasible Predictions</h2>
+        <p class="section-subtitle">
+          When an operational conflict is detected, the engine evaluates candidate alternatives to select the mathematically optimal decision.
+        </p>
+      </div>
+
+      <div class="principles-grid">
+        <div class="principle-box">
+          <h3 class="principle-title">Candidate 1: Hold Trailing Train</h3>
+          <p class="principle-desc">
+            Holds the trailing rake at the preceding station halt until the forward section clears. Evaluates total passenger-delay minutes incurred.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <h3 class="principle-title">Candidate 2: Dynamic Rerouting</h3>
+          <p class="principle-desc">
+            If the main corridor is blocked by unscheduled track maintenance, switches train to the loop line or parallel freight corridor track.
+          </p>
+        </div>
+
+        <div class="principle-box">
+          <h3 class="principle-title">Candidate 3: Speed Regulation</h3>
+          <p class="principle-desc">
+            Rather than stopping the train completely, instructs the loco-pilot via signalling to cruise at 50 km/h, timing arrival exactly as the platform clears.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div><strong>RailPulse</strong> — Smart India Hackathon Operational Intelligence</div>
+      <div>Layer 2: Headway Enforcement • Collision Prevention • Precedence Optimization • Safe Routing</div>
+    </div>
+  </footer>
+
+</body>
+</html>
