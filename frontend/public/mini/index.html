@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DARPAN — Project Demo & Presentation (SIH 26028)</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF6332'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FAF7F2;
+      --surface: #FFFFFF;
+      --surface-subtle: #F5EFE8;
+      --foreground: #18191B;
+      --muted: #767571;
+      --accent: #FF6332;
+      --border: rgba(23, 24, 28, 0.08);
+      --shadow-luxury: 0 8px 30px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--foreground);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Subtle warm ambient glow matching DARPAN theme */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 760px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(255, 99, 50, 0.08) 0%, rgba(250, 247, 242, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 920px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Minimal Top Header Bar */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px 6px 8px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      text-decoration: none;
+      color: var(--foreground);
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: var(--foreground);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-icon svg {
+      width: 17px;
+      height: 17px;
+      stroke: var(--accent);
+    }
+
+    .brand-name {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--border);
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .badge-sih {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--foreground);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255, 99, 50, 0.18);
+    }
+
+    /* Main Video Card */
+    .player-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #0D0E11;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(23, 24, 28, 0.12);
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Link Section Under the Video */
+    .link-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .link-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .link-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    .direct-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--foreground);
+      text-decoration: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: color 0.15s ease;
+    }
+
+    .direct-link:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .link-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 9999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--foreground);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(23, 24, 28, 0.25);
+    }
+
+    .btn-primary {
+      background: var(--foreground);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+    }
+
+    .btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .brand-sub, .brand-divider {
+        display: none;
+      }
+      .link-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .link-actions {
+        justify-content: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <!-- Minimal Project Theme Header -->
+    <header class="top-bar">
+      <div class="brand-pill">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="16" height="16" x="4" y="3" rx="2" />
+            <path d="M4 11h16" />
+            <path d="M12 3v8" />
+            <path d="m8 19-2 3" />
+            <path d="m18 22-2-3" />
+            <path d="M8 15h.01" />
+            <path d="M16 15h.01" />
+          </svg>
+        </div>
+        <span class="brand-name">DARPAN</span>
+        <span class="brand-divider"></span>
+        <span class="brand-sub">Dynamic Forecast of ETA for Coaching Trains · Ministry of Railways</span>
+      </div>
+
+      <div class="badge-sih">
+        <span class="status-dot"></span>
+        <span>Team Twarit · SIH26028</span>
+      </div>
+    </header>
+
+    <!-- Video Player Card -->
+    <section class="player-card">
+      <div class="video-wrapper">
+        <iframe
+          src="https://drive.google.com/file/d/1Qz0DTqZlDW14FyF7VVVAgwwtTXFZS6QE/preview"
+          title="DARPAN Project Video"
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <!-- Direct Link Shown Under the Video -->
+      <div class="link-bar">
+        <div class="link-info">
+          <span class="link-label">Direct Video Link</span>
+          <a
+            id="drive-url"
+            class="direct-link"
+            href="https://drive.google.com/file/d/1Qz0DTqZlDW14FyF7VVVAgwwtTXFZS6QE/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            https://drive.google.com/file/d/1Qz0DTqZlDW14FyF7VVVAgwwtTXFZS6QE/view?usp=sharing
+          </a>
+        </div>
+
+        <div class="link-actions">
+          <button type="button" class="btn btn-secondary" id="copy-btn" onclick="copyDriveLink()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+            </svg>
+            <span id="copy-text">Copy Link</span>
+          </button>
+
+          <a
+            class="btn btn-primary"
+            href="https://drive.google.com/file/d/1Qz0DTqZlDW14FyF7VVVAgwwtTXFZS6QE/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Open in Drive</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" x2="21" y1="14" y2="3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function copyDriveLink() {
+      const url = "https://drive.google.com/file/d/1Qz0DTqZlDW14FyF7VVVAgwwtTXFZS6QE/view?usp=sharing";
+      const textEl = document.getElementById("copy-text");
+      navigator.clipboard.writeText(url).then(() => {
+        textEl.textContent = "Copied!";
+        setTimeout(() => {
+          textEl.textContent = "Copy Link";
+        }, 1800);
+      });
+    }
+  </script>
+</body>
+</html>
